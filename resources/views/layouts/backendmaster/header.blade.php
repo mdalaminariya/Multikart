@@ -139,7 +139,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">
+                                    <a href="{{ route('admin.account.setting') }}">
                                         <i data-feather="settings"></i>Settings
                                     </a>
                                 </li>
