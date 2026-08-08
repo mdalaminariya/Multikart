@@ -2,6 +2,8 @@
 
 namespace App\Models\Physical\Product;
 
+use App\Models\physical\category\SubCategory;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Physical\Product\ProductImage;
 
@@ -16,5 +18,13 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class, 'product_id');
     }
+    public function subcategory()
+{
+    return $this->belongsTo(SubCategory::class, 'subcategory_id');
+}
+public function reviews()
+{
+    return $this->hasMany(Review::class);
+}
 
 }

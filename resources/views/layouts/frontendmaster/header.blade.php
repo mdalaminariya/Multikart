@@ -18,7 +18,7 @@
                         <li class="onhover-dropdown mobile-account"> <i class="ri-user-fill"></i>
                             My Account
                             <ul class="onhover-show-div">
-                                <li><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ Auth::check() ? route('admin.dashboard') : route('login') }}">Login</a></li>
                                 <li><a href="{{ route('register') }}">register</a></li>
                             </ul>
                         </li>
@@ -221,7 +221,7 @@
                                     <li class="mobile-box">
                                         <div class="mobile-back text-end">Menu<i class="ri-close-line"></i></div>
                                     </li>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="{{ route('home') }}">Home</a></li>
                                     <li class="mega hover-cls">
                                         <a href="#!">feature <div class="lable-nav">new</div></a>
                                         <ul class="mega-menu full-mega-menu">
@@ -707,13 +707,13 @@
                                                 <a href="#!">account</a>
                                                 <ul>
                                                     <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="dashboard.html">Dashboard</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
+                                                    <li><a href="{{ route('cart.index') }}">cart</a></li>
+                                                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                                    <li><a href="{{ route('login') }}">login</a></li>
+                                                    <li><a href="{{ route('register') }}">register</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="forget_pwd.html">forget password</a></li>
-                                                    <li><a href="profile.html">profile</a></li>
+                                                    <li><a href="{{ route('password.request') }}">forget password</a></li>
+                                                    <li><a href="{{ route('admin.account.setting') }}">profile</a></li>
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="order-success.html">order success</a></li>
                                                     <li><a href="order-tracking.html">order tracking<span
@@ -801,12 +801,24 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="onhover-div mobile-cart">
-                                        <div data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-                                            <i class="ri-shopping-cart-line"></i>
-                                        </div>
-                                        <span class="cart_qty_cls">2</span>
-                                    </li>
+                                        <li class="onhover-div mobile-cart">
+
+                                            <div
+                                                style="cursor:pointer"
+                                                data-bs-toggle="offcanvas"
+                                                data-bs-target="#cartOffcanvas">
+
+                                                <i class="ri-shopping-cart-line"></i>
+
+                                                @if($cartCount)
+                                                    <span class="cart_qty_cls">
+                                                        {{ $cartCount }}
+                                                    </span>
+                                                @endif
+
+                                            </div>
+
+                                        </li>
                                 </ul>
                             </div>
                         </div>

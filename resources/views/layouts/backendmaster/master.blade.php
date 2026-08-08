@@ -20,6 +20,7 @@
 
     <!-- CSS Toastify -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <title>Multikart - Premium Admin Template</title>
 
     <!-- Google font-->
@@ -96,6 +97,84 @@
     height: 38px;
     border-radius: 6px;
 }
+/* for media */
+.custom-dropzone{
+
+        border: 2px dashed #ff7a45;
+
+        border-radius: 8px;
+
+        background: #f8f8f8;
+
+        min-height: 330px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+    }
+
+    .custom-dropzone:hover{
+
+        background: #f1f1f1;
+
+    }
+
+    .custom-dropzone.dragover{
+
+        background: #ececec;
+
+        border-color: #ff5c1a;
+
+    }
+
+    .upload-icon{
+
+        font-size: 50px;
+
+        color: #ff7a45;
+
+        margin-bottom: 20px;
+
+    }
+
+    /* stats  badge */
+    .status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-processing {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-completed {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #842029;
+}
+
     </style>
 </head>
 

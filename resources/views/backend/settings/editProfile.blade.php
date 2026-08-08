@@ -26,7 +26,7 @@
                             <span>{{ $user->email }}</span>
 
                             <!-- SOCIAL LINKS (DB) -->
-                            <div class="social mt-2">
+                            {{-- <div class="social mt-2">
                                 <div class="form-group btn-showcase">
 
                                     <a href="{{ url('/auth/facebook') }}"
@@ -45,7 +45,7 @@
                                     </a>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -184,7 +184,7 @@
 
                                 <h5 class="f-w-600">Edit Profile</h5>
 
-                                <form action="{{ route('admin.account.settings.update') }}"
+                                <form action="{{ route('admin.account.setting.update') }}"
                                       method="POST"
                                       enctype="multipart/form-data">
 

@@ -1,3 +1,6 @@
+ @php
+    $latestOrder = \App\Models\Order::latest()->first();
+@endphp
  <div class="page-sidebar">
                 <div class="main-header-left d-none d-lg-block">
                     <div class="logo-wrapper">
@@ -113,26 +116,35 @@
                             </a>
 
                             <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order-list.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Order List</span>
-                                    </a>
-                                </li>
+                             @if (auth()->user()->role == 'admin'||auth()->user()->role == 'manager')
+                                   <li>
+                                       <a href="{{ route('admin.orders.list') }}">
+                                           <i class="fa fa-circle"></i>
+                                           <span>Order List</span>
+                                       </a>
+                                   </li>
+
 
                                 <li>
-                                    <a href="order-tracking.html">
+                                    <a href="{{ route('admin.orders.tracking.list') }}">
                                         <i class="fa fa-circle"></i>
                                         <span>Order Tracking</span>
                                     </a>
                                 </li>
-
-                                <li>
-                                    <a href="order-detail.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Order Details</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        @if($latestOrder)
+                                            <a href="{{ route('admin.orders.details', $latestOrder->id) }}">
+                                                <i class="fa fa-circle"></i>
+                                                <span>Order Details</span>
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-circle"></i>
+                                                <span>Order Details</span>
+                                            </a>
+                                        @endif
+                                    </li>
+                                    @endif
                             </ul>
                         </li>
 
@@ -164,12 +176,12 @@
                             </a>
                             <ul class="sidebar-submenu">
                                 <li>
-                                    <a href="coupon-list.html">
+                                    <a href="{{ route('admin.coupons.index') }}">
                                         <i class="fa fa-circle"></i>List Coupons
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="coupon-create.html">
+                                    <a href="{{ route('admin.coupons.create') }}">
                                         <i class="fa fa-circle"></i>Create Coupons
                                     </a>
                                 </li>
@@ -184,12 +196,12 @@
                             </a>
                             <ul class="sidebar-submenu">
                                 <li>
-                                    <a href="pages-list.html">
+                                    <a href="{{ route('admin.pages.index') }}">
                                         <i class="fa fa-circle"></i>List Page
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page-create.html">
+                                    <a href="{{ route('admin.pages.create') }}">
                                         <i class="fa fa-circle"></i>Create Page
                                     </a>
                                 </li>
@@ -197,7 +209,7 @@
                         </li>
 
                         <li>
-                            <a class="sidebar-header" href="media.html">
+                            <a class="sidebar-header" href="{{ route('admin.media.index') }}">
                                 <i data-feather="camera"></i>
                                 <span>Media</span>
                             </a>
@@ -211,57 +223,61 @@
                             </a>
                             <ul class="sidebar-submenu">
                                 <li>
-                                    <a href="menu-list.html">
+                                    <a href="{{ route('admin.menu.index') }}">
                                         <i class="fa fa-circle"></i>Menu Lists
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="create-menu.html">
+                                    <a href="{{ route('admin.menu.create') }}">
                                         <i class="fa fa-circle"></i>Create Menu
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="user-plus"></i>
-                                <span>Users</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="user-list.html">
-                                        <i class="fa fa-circle"></i>User List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="create-user.html">
-                                        <i class="fa fa-circle"></i>Create User
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                  @if (auth()->user()->role == 'admin'||auth()->user()->role == 'manager')
+                          <li>
+                              <a class="sidebar-header" href="javascript:void(0)">
+                                  <i data-feather="user-plus"></i>
+                                  <span>Users</span>
+                                  <i class="fa fa-angle-right pull-right"></i>
+                              </a>
+                              <ul class="sidebar-submenu">
+                                  <li>
+                                      <a href="{{ route('admin.users.list') }}">
+                                          <i class="fa fa-circle"></i>User List
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="{{ route('admin.users.view') }}">
+                                          <i class="fa fa-circle"></i>Create User
+                                      </a>
+                                  </li>
+                              </ul>
+                          </li>
+                  @endif
 
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="users"></i>
-                                <span>Vendors</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="list-vendor.html">
-                                        <i class="fa fa-circle"></i>Vendor List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="create-vendors.html">
-                                        <i class="fa fa-circle"></i>Create Vendor
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
+                            <li>
+                                <a class="sidebar-header" href="javascript:void(0)">
+                                    <i data-feather="users"></i>
+                                    <span>Vendors</span>
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sidebar-submenu">
+                                    <li>
+                                        <a href="{{ route('admin.vendors.list') }}">
+                                            <i class="fa fa-circle"></i>Vendor List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.vendors.create') }}">
+                                            <i class="fa fa-circle"></i>Create Vendor
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
 
                         <li>
                             <a class="sidebar-header" href="javascript:void(0)">
@@ -292,7 +308,7 @@
                         </li>
 
                         <li>
-                            <a class="sidebar-header" href="reports.html"><i
+                            <a class="sidebar-header" href="{{ route('admin.reports.index') }}"><i
                                     data-feather="bar-chart"></i><span>Reports</span>
                             </a>
                         </li>
@@ -315,14 +331,14 @@
                         </li>
 
                         <li>
-                            <a class="sidebar-header" href="forgot-password.html">
+                            <a class="sidebar-header" href="{{ route('password.request') }}">
                                 <i data-feather="key"></i>
                                 <span>Forgot Password</span>
                             </a>
                         </li>
 
-                        <li>
-                            <a class="sidebar-header" href="login.html">
+                         <li>
+                            <a class="sidebar-header" href="{{ route('dashboard') }}">
                                 <i data-feather="log-in"></i>
                                 <span>Login</span>
                             </a>

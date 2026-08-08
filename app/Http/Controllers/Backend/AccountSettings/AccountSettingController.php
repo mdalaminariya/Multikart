@@ -35,11 +35,6 @@ class AccountSettingController extends Controller
                 'enable_notifications' => 0,
                 'own_activity_notification' => 0,
                 'dnd' => 0,
-
-                'facebook' => null,
-                'google'   => null,
-                'twitter'  => null,
-
                 'performance'   => 0,
                 'overtime'      => 0,
                 'leaves_taken'  => 0,

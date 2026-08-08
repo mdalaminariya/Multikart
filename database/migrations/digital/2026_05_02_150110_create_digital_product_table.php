@@ -16,6 +16,7 @@ return new class extends Migration
 
         // Subcategory relation
         $table->foreignId('subcategory_id')->constrained('digital_subcategories')->onDelete('cascade');
+        $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
 
         // Basic product info
         $table->string('title');
@@ -25,8 +26,10 @@ return new class extends Migration
         $table->string('images')->nullable();
         $table->decimal('price', 10, 2);
         $table->integer('quantity')->default(1);
+        $table->text('sizes')->nullable();
         $table->enum('status',['enable','disable'])->default('disable');
         $table->text('colors')->nullable();
+
         // SEO fields
         $table->string('meta_title')->nullable();
         $table->text('meta_description')->nullable();

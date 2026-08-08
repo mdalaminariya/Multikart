@@ -39,6 +39,43 @@
 
     <!-- CSS Toastify -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <style>
+        .address-book-section .address-box{
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.address-box .btn-solid{
+    background: #ea8a4a;
+    color: #fff;
+    border: none;
+    padding: 6px 15px;
+    font-size: 13px;
+    border-radius: 0;
+}
+
+.address-box .address p,
+.address-box .number p{
+    margin-bottom: 5px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.address-box .btn-light{
+    background: #f5f5f5;
+    border: 1px solid #eee;
+    font-weight: 600;
+}
+
+.address-box .btn-light:hover{
+    background: #eee;
+}
+    </style>
+
 </head>
 
 <body class="theme-color-1">
@@ -55,11 +92,12 @@
 
     @yield('content')
 
+    {{-- Cart Sidebar --}}
+    @include('frontend.carts.cart')
 
 <!-- Footer Section Start -->
     @include('layouts.frontendmaster.footer')
 <!-- Footer Section End -->
-
 
 <!-- Search Modal Start -->
     <div class="modal fade search-modal theme-modal-2" id="searchModal" tabindex="-1">
@@ -340,11 +378,6 @@
 <!-- Search Modal End -->
 
 
-<!-- Cart Offcanvas Start -->
-    @include('layouts.frontendmaster.cartoffcanvas')
-<!-- Cart Offcanvas End -->
-
-
 <!-- cookie bar start -->
 <div class="cookie-bar">
     <p>We use cookies to improve our site and your shopping experience. By continuing to browse our site you accept
@@ -401,122 +434,6 @@
     @include('layouts.frontendmaster.themesetting')
 <!-- theme setting end -->
 
-
-<!-- Add to cart modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal cart-modal" id="addtocart" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body modal1">
-                <div class="container-fluid p-0">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="modal-bg addtocart">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span>&times;</span>
-                                </button>
-                                <div class="media">
-                                    <a href="#!">
-                                        <img class="img-fluid blur-up lazyload pro-img"
-                                             src="assets/images/fashion/product/55.jpg" alt="">
-                                    </a>
-                                    <div class="media-body align-self-center text-center">
-                                        <a href="#!">
-                                            <h6>
-                                                <i class="ri-checkbox-circle-fill"></i>Item
-                                                <span>men full sleeves</span>
-                                                <span> successfully added to your Cart</span>
-                                            </h6>
-                                        </a>
-                                        <div class="buttons">
-                                            <a href="#!" class="view-cart btn btn-solid">Your cart</a>
-                                            <a href="#!" class="checkout btn btn-solid">Check out</a>
-                                            <a href="#!" class="continue btn btn-solid">Continue shopping</a>
-                                        </div>
-
-                                        <div class="upsell_payment">
-                                            <img src="assets/images/payment_cart.png"
-                                                 class="img-fluid blur-up lazyload" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-section">
-                                    <div class="col-12 product-upsell text-center">
-                                        <h4>Customers who bought this item also.</h4>
-                                    </div>
-                                    <div class="row" id="upsell_product">
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#!">
-                                                        <img src="assets/images/fashion/product/1.jpg"
-                                                             class="img-fluid blur-up lazyload mb-1"
-                                                             alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#!"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#!">
-                                                        <img src="assets/images/fashion/product/34.jpg"
-                                                             class="img-fluid blur-up lazyload mb-1"
-                                                             alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#!"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#!">
-                                                        <img src="assets/images/fashion/product/13.jpg"
-                                                             class="img-fluid blur-up lazyload mb-1"
-                                                             alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#!"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#!">
-                                                        <img src="assets/images/fashion/product/19.jpg"
-                                                             class="img-fluid blur-up lazyload mb-1"
-                                                             alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#!"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Add to cart modal popup end-->
-
-
 <!-- exit modal popup start-->
 <div class="modal fade bd-example-modal-lg theme-modal exit-modal" id="exit_popup" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -551,7 +468,7 @@
         </div>
     </div>
 </div>
-<!-- Add to cart modal popup end-->
+
 
 
 <!-- facebook chat section start -->

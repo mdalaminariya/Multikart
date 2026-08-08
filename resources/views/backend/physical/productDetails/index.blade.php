@@ -63,13 +63,19 @@
                         <h2>{{ $product->title }}</h2>
 
                         <!-- ⭐ Rating -->
-                        <select id="u-rating-fontawesome-o"
-                                name="rating"
-                                data-current-rating="5">
+                        <div class="rating-list">
+                            @php
+                                $rating = round($avgRating ?? 0);
+                            @endphp
+
                             @for ($i = 1; $i <= 5; $i++)
-                                <option value="{{ $i }}">{{ $i }}</option>
+                                @if ($i <= $rating)
+                                    <i class="ri-star-fill"></i>
+                                @else
+                                    <i class="ri-star-line"></i>
+                                @endif
                             @endfor
-                        </select>
+                        </div>
 
                         <hr>
 

@@ -164,7 +164,6 @@
 @section('script')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
     // Toast messages
     @if (session('success'))
         Toastify({
@@ -187,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
             backgroundColor: "linear-gradient(to right, #FF0112, #D21302)",
         }).showToast();
     @endif
+
 
 
     // Category update route template

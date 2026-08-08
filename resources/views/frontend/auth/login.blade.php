@@ -55,7 +55,7 @@
                                         Login
                                     </button>
 
-                                    <a href="javascript:void(0)" class="btn btn-link">
+                                    <a href="{{ route('password.request') }}" class="btn btn-link">
                                         Forgot Password?
                                     </a>
 

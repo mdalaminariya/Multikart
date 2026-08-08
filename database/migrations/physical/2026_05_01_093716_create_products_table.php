@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('subcategory_id')->constrained('subcategories')->onDelete('cascade');
             $table->string('title');
             $table->string('product_code')->unique();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->decimal('price', 10, 2);
             $table->decimal('discount', 10, 2)->nullable();
             $table->string('colors')->nullable();
