@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
                                 <ol class="breadcrumb pull-right">
                                     <li class="breadcrumb-item">
-                                        <a href="index.html">
+                                        <a href="{{ route('admin.dashboard') }}">
                                             <i data-feather="home"></i>
                                         </a>
                                     </li>
@@ -125,7 +125,7 @@
                                                         is-invalid
                                                        @enderror" name="role">
                                                             <option value="">Select Roles</option>
-                                                            <option value="seller" {{ old('role', $vendor->role) == 'seller' ? 'selected' : '' }}>seller</option>
+                                                            <option value="vendor" {{ old('role', $vendor->role) == 'vendor' ? 'selected' : '' }}>Vendor</option>
                                                        </select>
                                                     </div>
                                                      <div class="text-danger d-block mt-1" style="margin-left: 30%">

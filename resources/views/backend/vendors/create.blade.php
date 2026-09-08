@@ -50,12 +50,12 @@
                                                     <label for="validationCustom0"
                                                         class="col-xl-3 col-md-4"><span>*</span> First Name</label>
                                                     <div class="col-xl-8 col-md-7">
-                                                        <input name="first_name" class="form-control @error('first_name')
+                                                        <input name="fname" class="form-control @error('fname')
                                                             is-invalid
                                                         @enderror" id="validationCustom0" type="text">
                                                     </div>
                                                     <div class="text-danger d-block mt-1" style="margin-left: 30%">
-                                                        @error('first_name')
+                                                        @error('fname')
                                                             <small> {{ $message }} </small>
                                                         @enderror
                                                     </div>
@@ -64,26 +64,12 @@
                                                     <label for="validationCustom1"
                                                         class="col-xl-3 col-md-4"><span>*</span> Last Name</label>
                                                     <div class="col-xl-8 col-md-7">
-                                                        <input name="last_name" class="form-control @error('last_name')
+                                                        <input name="lname" class="form-control @error('lname')
                                                             is-invalid
                                                         @enderror" id="validationCustom1" type="text">
                                                     </div>
                                                     <div class="text-danger d-block mt-1" style="margin-left: 30%">
-                                                        @error('last_name')
-                                                            <small> {{ $message }} </small>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom1"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Store Name</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input name="store_name" class="form-control @error('store_name')
-                                                            is-invalid
-                                                        @enderror" id="validationCustom1" type="text">
-                                                    </div>
-                                                    <div class="text-danger d-block mt-1" style="margin-left: 30%">
-                                                        @error('store_name')
+                                                        @error('lname')
                                                             <small> {{ $message }} </small>
                                                         @enderror
                                                     </div>
@@ -124,7 +110,7 @@
                                                         is-invalid
                                                        @enderror" name="role">
                                                             <option value="">Select Roles</option>
-                                                            <option value="seller">seller</option>
+                                                            <option value="vendor">Vendor</option>
                                                        </select>
                                                     </div>
                                                      <div class="text-danger d-block mt-1" style="margin-left: 30%">

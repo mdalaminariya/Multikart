@@ -7,6 +7,7 @@ use App\Models\Digital\Product\Product as DigitalProduct;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -21,6 +22,15 @@ protected $guarded = [];
         'remember_token',
     ];
 
+public function vendor()
+{
+    return $this->hasOne(Vendor::class, 'user_id');
+}
+
+public function accountSetting()
+{
+    return $this->hasOne(AccountSetting::class, 'user_id');
+}
 
     protected function casts(): array
     {
@@ -42,5 +52,14 @@ public function digitalProducts()
 public function addresses()
 {
     return $this->hasMany(Address::class);
+}
+public function walletTransactions(): HasMany
+{
+    return $this->hasMany(WalletTransaction::class);
+}
+
+public function bankDetail()
+{
+    return $this->hasOne(BankDetail::class);
 }
 }

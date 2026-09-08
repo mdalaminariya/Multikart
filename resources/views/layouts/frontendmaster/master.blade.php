@@ -533,10 +533,18 @@
 <script src="{{ asset('frontend') }}/assets/js/theme-setting.js"></script>
 <script src="{{ asset('frontend') }}/assets/js/script.js"></script>
 
+    <!-- dare picker js -->
+    <script src="{{ asset('frontend') }}/assets/js/date-picker.js"></script>
+    <!-- chart js -->
+    <script src="{{ asset('frontend') }}/assets/js/chart/apex/apexcharts.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/chart/apex/custom-chart.js"></script>
+
 {{-- Google reCAPTCHA --}}
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <!-- JS Toastify -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 {{--Newslater modal show once --}}
 <script>

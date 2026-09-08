@@ -124,7 +124,7 @@
                             </div>
                             <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
                                 <li>
-                                    <a href="{{ route('admin.account.setting.edit') }}">
+                                    <a href="{{ route('admin.account.settings.edit') }}">
                                         <i data-feather="user"></i>Edit Profile
                                     </a>
                                 </li>

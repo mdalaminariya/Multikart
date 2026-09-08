@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\Auth\ForgotPasswordController;
 use App\Http\Controllers\Backend\HomeController\BackendController;
 use App\Http\Controllers\Backend\Physical\ProductController;
 use App\Http\Controllers\Auth\UserAuthenticationController;
+use App\Http\Controllers\Frontend\WalletController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Backend\Physical\CategoryController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\Backend\Digital\CategoryController as DigitalCategoryCo
 use App\Http\Controllers\Backend\Digital\SubCategoryController as DigitalSubCategoryController;
 use App\Http\Controllers\Backend\Digital\ProductController as DigitalProductController;
 use App\Http\Controllers\Backend\reports\ReportController;
+use App\Http\Controllers\Frontend\VendorController;
+use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +51,22 @@ Route::get('/product/{type}/{id}', [HomeController::class, 'productDetails'])->n
 
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-    Route::post('/order/store', [\App\Http\Controllers\Frontend\OrderController::class, 'placeOrder'])->name('order.store');
+    Route::post('/order/store', [FrontendOrderController::class, 'placeOrder'])->name('order.store');
+
+    //vendor dashboard start
+
+    Route::middleware('auth')->group(function () {
+
+    Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
+
+    Route::post('/vendor/profile/update', [VendorController::class, 'vendorProfileUpdate'])->name('vendor.profile.update');
+    
+    Route::post('/vendor/settings/notifications', [VendorController::class, 'updateNotifications'])->name('vendor.settings.notifications');
+
+    Route::post('/vendor/settings/deactivate', [VendorController::class, 'deactivate'])->name('vendor.settings.deactivate');
+
+    Route::post('/vendor/settings/delete', [VendorController::class, 'deleteAccount'])->name('vendor.settings.delete');
+});
 
 //User dashboard route
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -145,6 +163,9 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('/admin/orders/{order}', [OrderController::class, 'details'])->name('orders.details');
     Route::get('/admin/orders/details', [OrderController::class, 'latestDetails'])->name('orders.details.latest');
     // order routes end
+
+    // Bank details
+    Route::post('/dashboard/bank-details', [DashboardController::class, 'saveBankDetails'])->name('dashboard.bank-details');
     // coupon routes
     Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index');
     Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create');
@@ -164,7 +185,12 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
 
     // Report routes
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    // sales order
+    Route::get('sales/orders',[BackendController::class,'salesOrders'])->name('sales.orders');
 
+    //Transection list
+
+    Route::get('sales/transactions',[BackendController::class,'transaction'])->name('sales.transaction');
 
     //menu routes
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
@@ -183,7 +209,7 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     });
     // account settings
     Route::get('/account/settings', [AccountSettingController::class, 'index'])->name('account.setting');
-    Route:: get('account/setting/edit',[AccountSettingController:: class, 'edit'])->name('account.setting.edit');
+    Route:: get('account/setting/edit',[AccountSettingController:: class, 'edit'])->name('account.settings.edit');
     Route::post('/account-settings/update', [AccountSettingController::class, 'update'])->name('account.setting.update');
 
     // social
@@ -198,23 +224,22 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('/users/registration/delete/{id}', [UserAuthenticationController::class, 'delete'])->name('users.delete');
 
     //vendors create
-    // vendor list
-    Route::get('/vendors/list', [UserAuthenticationController::class, 'index'])->name('vendors.list');
+Route::get('/vendors/list', [UserAuthenticationController::class, 'index'])->name('vendors.list');
 
-    // vendor create form
-        Route::get('/vendors/create', [UserAuthenticationController::class, 'create'])->name('vendors.create');
+// Vendor create form
+Route::get('/vendors/create', [UserAuthenticationController::class, 'create'])->name('vendors.create');
 
-    // vendor store
-    Route::post('/vendors/create', [UserAuthenticationController::class, 'vendorStore'])->name('vendors.store');
+// Admin creates vendor
+Route::post('/vendors/create', [UserAuthenticationController::class, 'vendorStore'])->name('vendors.store');
 
-    // vendor edit
-    Route::get('/vendors/edit/{id}', [UserAuthenticationController::class, 'edit'])->name('vendors.edit');
+// Vendor basic account edit
+Route::get('/vendors/edit/{id}', [UserAuthenticationController::class, 'edit'])->name('vendors.edit');
 
-    // vendor update
-    Route::put('/vendors/update/{id}', [UserAuthenticationController::class, 'update'])->name('vendors.update');
+// Vendor basic account update
+Route::put('/vendors/update/{id}', [UserAuthenticationController::class, 'update'])->name('vendors.update');
 
-    // vendor delete
-    Route::get('/vendors/delete/{id}', [UserAuthenticationController::class, 'vendorDelete'])->name('vendors.delete');
+// Vendor delete
+Route::get('/vendors/delete/{id}', [UserAuthenticationController::class, 'vendorDelete']) ->name('vendors.delete');
 });
 //Backend Route end here
 

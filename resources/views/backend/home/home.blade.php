@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="media-body media-doller">
                                             <span class="m-0">Earnings</span>
-                                            <h3 class="mb-0">$ <span class="counter">6659</span><small> This
+                                            <h3 class="mb-0">$ <span class="counter">{{ $monthlyEarnings }}</span><small> This
                                                     Month</small>
                                             </h3>
                                         </div>
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="media-body media-doller">
                                             <span class="m-0">Products</span>
-                                            <h3 class="mb-0">$ <span class="counter">9856</span><small> This
+                                            <h3 class="mb-0">$ <span class="counter">{{ $monthlyProducts }}</span><small> This
                                                     Month</small>
                                             </h3>
                                         </div>
@@ -94,7 +94,7 @@
                                                     class="font-danger"></i></div>
                                         </div>
                                         <div class="media-body media-doller"><span class="m-0">New Vendors</span>
-                                            <h3 class="mb-0">$ <span class="counter">5631</span><small> This
+                                            <h3 class="mb-0">$ <span class="counter">{{ $monthlyVendors }}</span><small> This
                                                     Month</small></h3>
                                         </div>
                                     </div>
@@ -155,38 +155,49 @@
                                                     <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td class="digits">$120.00</td>
-                                                    <td class="font-danger">Bank Transfers</td>
-                                                    <td class="digits">On Way</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td class="digits">$90.00</td>
-                                                    <td class="font-secondary">Ewallets</td>
-                                                    <td class="digits">Delivered</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td class="digits">$240.00</td>
-                                                    <td class="font-warning">Cash</td>
-                                                    <td class="digits">Delivered</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td class="digits">$120.00</td>
-                                                    <td class="font-primary">Direct Deposit</td>
-                                                    <td class="digits">$6523</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td class="digits">$50.00</td>
-                                                    <td class="font-primary">Bank Transfers</td>
-                                                    <td class="digits">Delivered</td>
-                                                </tr>
-                                            </tbody>
+                                                <tbody>
+                                                    @forelse ($orders as $order)
+                                                        <tr>
+                                                            <td>{{ $order->id }}</td>
+
+                                                            <td class="digits">
+                                                                ${{ number_format($order->total, 2) }}
+                                                            </td>
+
+                                                            <td class="font-danger">
+                                                                {{ $order->payment_method ?? 'N/A' }}
+                                                            </td>
+
+                                                            <td class="digits">
+                                                                @if($order->status == 'pending')
+                                                                    <span class="badge bg-warning">Pending</span>
+
+                                                                @elseif($order->status == 'processing')
+                                                                    <span class="badge bg-info">Processing</span>
+
+                                                                @elseif($order->status == 'completed')
+                                                                    <span class="badge bg-success">Completed</span>
+
+                                                                @elseif($order->status == 'cancelled')
+                                                                    <span class="badge bg-danger">Cancelled</span>
+
+                                                                @else
+                                                                    <span class="badge bg-secondary">
+                                                                        {{ ucfirst($order->status) }}
+                                                                    </span>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="4" class="text-center">
+                                                                <div class="alert alert-warning mb-0" role="alert">
+                                                                    No orders found.
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
                                         </table>
                                         <a href="order.html" class="btn btn-primary mt-4">View All Orders</a>
                                     </div>

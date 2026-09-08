@@ -12,7 +12,10 @@ class Vendor extends Model
 {
     use HasFactory;
 
-    protected $table = 'users'; // IMPORTANT (because vendor = user)
+  public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
     protected $guarded = [];
 
     // Physical Products

@@ -9,6 +9,8 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Address;
+use App\Models\WalletTransaction;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -127,11 +129,37 @@ class OrderController extends Controller
                 ]);
             }
 
-            /*
-            |--------------------------------------------------------------------------
-            | Empty Cart
-            |--------------------------------------------------------------------------
-            */
+            // Current Wallet Balance
+             $currentBalance = $user->wallet ?? 0;
+            //   New Wallet Balance
+             $newBalance = $currentBalance - $total;
+                             WalletTransaction::create([
+
+                    'user_id' => $user->id,
+
+                    'order_id' => $order->id,
+
+                    'transaction_id' => 'TXN' . strtoupper(
+                        Str::random(12)
+                    ),
+
+                    'type' => 'debit',
+
+                    'amount' => $total,
+
+                    'balance_after' => $newBalance,
+
+                    'description' =>
+                        'Wallet amount successfully debited for Order #' .
+                        $order->order_number,
+                ]);
+
+                // Update user's wallet balance
+                $user->wallet = $newBalance;
+                $user->save();
+
+                // Empty Cart
+
             Cart::where('user_id', $user->id)->delete();
 
             DB::commit();

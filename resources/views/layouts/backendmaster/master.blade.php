@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +36,9 @@
     <!-- Flag icon-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend') }}/assets/css/vendors/flag-icon.css">
 
+       <!-- Datatables css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend') }}/assets/css/vendors/datatables.css">
+
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend') }}/assets/css/vendors/icofont.css">
 
@@ -50,8 +52,7 @@
 <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/vendors/rating.css">
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend') }}/assets/css/vendors/bootstrap.css">
-
-    <!-- App css-->
+<!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend') }}/assets/css/style.css">
     <style>
 .zoom-box {
@@ -250,7 +251,11 @@
 
     <!-- Owlcarousel js-->
     <script src="{{ asset('backend') }}/assets/js/owlcarousel/owl.carousel.js"></script>
-<script src="{{ asset('backend') }}/assets/js/dashboard/product-carousel.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/dashboard/product-carousel.js"></script>
+
+    <!-- Datatable js-->
+    <script src="{{ asset('backend') }}/assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/datatables/custom-basic.js"></script>
 
     <!--Customizer admin-->
     <script src="{{ asset('backend') }}/assets/js/admin-customizer.js"></script>
@@ -273,6 +278,7 @@
 
     <!-- JS Toastify -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 
     @yield('script')
 

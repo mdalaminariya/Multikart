@@ -107,27 +107,27 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="counter-box">
-                                            <img src="../assets/images/dashboard/balance.png" alt="" class="img-fluid">
+                                            <img src="{{ asset('uploads/dashboard/balance.png') }}" alt="" class="img-fluid">
                                             <div>
-                                                <h3>$12.46</h3>
-                                                <h5>Total Order</h5>
+                                                <h3>${{ $transactions->sum('amount') }}</h3>
+                                                <h5>Total Balance</h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="counter-box">
-                                            <img src="../assets/images/dashboard/points.png" alt="" class="img-fluid">
+                                            <img src="{{ asset('uploads/dashboard/points.png') }}" alt="" class="img-fluid">
                                             <div>
-                                                <h3>2530</h3>
+                                                <h3>{{ $orders->sum('price') }}</h3>
                                                 <h5>Total Points</h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="counter-box">
-                                            <img src="../assets/images/dashboard/order.png" alt="" class="img-fluid">
+                                            <img src="{{ asset('uploads/dashboard/orders.png') }}" alt="" class="img-fluid">
                                             <div>
-                                                <h3>15</h3>
+                                                <h3>{{ $orders->count() }}</h3>
                                                 <h5>Total Orders</h5>
                                             </div>
                                         </div>
@@ -182,160 +182,60 @@
                                             <div class="top-sec">
                                                 <h3>Notifications</h3>
                                             </div>
-                                            <ul class="notification-list">
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1013. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 24 Jun 2024
-                                                        02:29:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your Refund request status has been rejected</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        05:42:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1012. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        05:18:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1011. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        05:18:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1010. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        04:29:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1009. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:57:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1008 has been updated and
-                                                        current order
-                                                        status is in delivered. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:49:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1008 has been updated and
-                                                        current order
-                                                        status is in pending. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:49:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1007 has been updated and
-                                                        current order
-                                                        status is in delivered. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:49:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1006. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:48:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1005. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:45:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1000 has been updated and
-                                                        current order
-                                                        status is in delivered. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:34:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1003 has been updated and
-                                                        current order
-                                                        status is in cancelled. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:34:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1004 has been updated and
-                                                        current order
-                                                        status is in delivered. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:34:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1004 has been updated and
-                                                        current order
-                                                        status is in out_for_delivery. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:34:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1004 has been updated and
-                                                        current order
-                                                        status is in shipped. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:34:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Order Update: Your order #1004 has been updated and
-                                                        current order
-                                                        status is in processing. Thank you for your patience!</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:34:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1004. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:14:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1003. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:10:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1002. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:07:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1001. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:02:PM</h5>
-                                                </li>
-                                                <li>
-                                                    <h4>Your order has been successfully placed. Order ID:
-                                                        #1000. Thank you for
-                                                        choosing us.</h4>
-                                                    <h5><i class="ri-time-line"></i> 21 Jun 2024
-                                                        03:00:PM</h5>
-                                                </li>
-                                            </ul>
+                                                <ul class="notification-list">
+
+                                                    @forelse($orders as $order)
+
+                                                        <li>
+                                                            <h4>
+                                                                @if($order->status === 'pending')
+
+                                                                    Your order #{{ $order->order_number ?? $order->id }}
+                                                                    has been successfully placed and is currently pending.
+                                                                    Thank you for choosing us.
+
+                                                                @elseif($order->status === 'processing')
+
+                                                                    Order Update: Your order #{{ $order->order_number ?? $order->id }}
+                                                                    is currently being processed.
+
+                                                                @elseif($order->status === 'completed')
+
+                                                                    Order Update: Your order #{{ $order->order_number ?? $order->id }}
+                                                                    has been completed successfully.
+
+                                                                @elseif($order->status === 'cancelled')
+
+                                                                    Order Update: Your order #{{ $order->order_number ?? $order->id }}
+                                                                    has been cancelled.
+
+                                                                @else
+
+                                                                    Order Update: Your order #{{ $order->order_number ?? $order->id }}
+                                                                    status is {{ str_replace('_', ' ', $order->status) }}.
+
+                                                                @endif
+                                                            </h4>
+
+                                                            <h5>
+                                                                <i class="ri-time-line"></i>
+                                                                {{ $order->created_at->format('d M Y h:i A') }}
+                                                            </h5>
+                                                        </li>
+
+                                                    @empty
+
+                                                        <li>
+                                                            <h4>No notifications available.</h4>
+                                                            <h5>
+                                                                <i class="ri-time-line"></i>
+                                                                No recent activity
+                                                            </h5>
+                                                        </li>
+
+                                                    @endforelse
+
+                                                </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -349,69 +249,124 @@
                                             <div class="top-sec">
                                                 <h3>Bank Details</h3>
                                             </div>
-                                            <form class="themeform-auth">
-                                                <div class="row mb-3 align-items-center">
-                                                    <label for="bank_account_no"
-                                                        class="form-label col-xxl-2 col-lg-12 col-md-3">Bank Account
-                                                        Number</label>
-                                                    <div class="col-xxl-10 col-lg-12 col-md-9">
-                                                        <input type="text" id="bank_account_no" class="form-control"
-                                                            placeholder="Enter Bank Account Number">
+                                             <form action="{{ route('admin.dashboard.bank-details') }}" method="POST"class="themeform-auth">
+
+                                                    @csrf
+
+                                                    <div class="top-sec">
+                                                        <h3>Bank Details</h3>
                                                     </div>
-                                                </div>
-                                                <div class="row mb-3 align-items-center">
-                                                    <label for="bank_name"
-                                                        class="form-label col-xxl-2 col-lg-12 col-md-3">Bank
-                                                        Name</label>
-                                                    <div class="col-xxl-10 col-lg-12 col-md-9"><input type="text"
-                                                            id="bank_name" class="form-control"
-                                                            placeholder="Enter Bank Name">
+
+                                                    <div class="row mb-3 align-items-center">
+                                                        <label for="bank_account_no"
+                                                            class="form-label col-xxl-2 col-lg-12 col-md-3">
+                                                            Bank Account Number
+                                                        </label>
+
+                                                        <div class="col-xxl-10 col-lg-12 col-md-9">
+                                                            <input type="text"
+                                                                name="bank_account_no"
+                                                                id="bank_account_no"
+                                                                class="form-control"
+                                                                value="{{ old('bank_account_no', $bankDetail->bank_account_no ?? '') }}"
+                                                                placeholder="Enter Bank Account Number">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mb-3 align-items-center">
-                                                    <label for="bank_holder_name"
-                                                        class="form-label col-xxl-2 col-lg-12 col-md-3">Holder
-                                                        Name</label>
-                                                    <div class="col-xxl-10 col-lg-12 col-md-9"><input type="text"
-                                                            id="bank_holder_name" class="form-control"
-                                                            placeholder="Enter Bank Holder Name">
+
+                                                    <div class="row mb-3 align-items-center">
+                                                        <label for="bank_name"
+                                                            class="form-label col-xxl-2 col-lg-12 col-md-3">
+                                                            Bank Name
+                                                        </label>
+
+                                                        <div class="col-xxl-10 col-lg-12 col-md-9">
+                                                            <input type="text"
+                                                                name="bank_name"
+                                                                id="bank_name"
+                                                                class="form-control"
+                                                                value="{{ old('bank_name', $bankDetail->bank_name ?? '') }}"
+                                                                placeholder="Enter Bank Name">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mb-3 align-items-center">
-                                                    <label for="swift"
-                                                        class="form-label col-xxl-2 col-lg-12 col-md-3">Swift</label>
-                                                    <div class="col-xxl-10 col-lg-12 col-md-9">
-                                                        <input type="text" id="swift" class="form-control"
-                                                            placeholder="Enter Swift Code">
+
+                                                    <div class="row mb-3 align-items-center">
+                                                        <label for="bank_holder_name"
+                                                            class="form-label col-xxl-2 col-lg-12 col-md-3">
+                                                            Holder Name
+                                                        </label>
+
+                                                        <div class="col-xxl-10 col-lg-12 col-md-9">
+                                                            <input type="text"
+                                                                name="bank_holder_name"
+                                                                id="bank_holder_name"
+                                                                class="form-control"
+                                                                value="{{ old('bank_holder_name', $bankDetail->bank_holder_name ?? '') }}"
+                                                                placeholder="Enter Bank Holder Name">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mb-3 align-items-center">
-                                                    <label for="ifsc"
-                                                        class="form-label col-xxl-2 col-lg-12 col-md-3">IFSC</label>
-                                                    <div class="col-xxl-10 col-lg-12 col-md-9">
-                                                        <input type="text" id="ifsc" class="form-control"
-                                                            placeholder="Enter IFSC Code">
+
+                                                    <div class="row mb-3 align-items-center">
+                                                        <label for="swift"
+                                                            class="form-label col-xxl-2 col-lg-12 col-md-3">
+                                                            Swift
+                                                        </label>
+
+                                                        <div class="col-xxl-10 col-lg-12 col-md-9">
+                                                            <input type="text"
+                                                                name="swift"
+                                                                id="swift"
+                                                                class="form-control"
+                                                                value="{{ old('swift', $bankDetail->swift ?? '') }}"
+                                                                placeholder="Enter Swift Code">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </form>
-                                            <div class="mb-3 top-sec top-sec-2">
-                                                <h3>Payment Details</h3>
-                                            </div>
-                                            <form class="themeform-auth">
-                                                <div class="row mb-3 align-items-center">
-                                                    <label for="paypal_email"
-                                                        class="form-label col-xxl-2 col-lg-12 col-md-3">Paypal
-                                                        Email</label>
-                                                    <div class="col-xxl-10 col-lg-12 col-md-9">
-                                                        <input type="email" id="paypal_email" class="form-control "
-                                                            placeholder="Enter Paypal Email">
+
+                                                    <div class="row mb-3 align-items-center">
+                                                        <label for="ifsc"
+                                                            class="form-label col-xxl-2 col-lg-12 col-md-3">
+                                                            IFSC
+                                                        </label>
+
+                                                        <div class="col-xxl-10 col-lg-12 col-md-9">
+                                                            <input type="text"
+                                                                name="ifsc"
+                                                                id="ifsc"
+                                                                class="form-control"
+                                                                value="{{ old('ifsc', $bankDetail->ifsc ?? '') }}"
+                                                                placeholder="Enter IFSC Code">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="text-end">
-                                                    <button class="btn btn-solid" id="payout_btn" type="submit"> Save
-                                                    </button>
-                                                </div>
-                                            </form>
+
+
+                                                    <div class="mb-3 top-sec top-sec-2">
+                                                        <h3>Payment Details</h3>
+                                                    </div>
+
+                                                    <div class="row mb-3 align-items-center">
+                                                        <label for="paypal_email"
+                                                            class="form-label col-xxl-2 col-lg-12 col-md-3">
+                                                            Paypal Email
+                                                        </label>
+
+                                                        <div class="col-xxl-10 col-lg-12 col-md-9">
+                                                            <input type="email"
+                                                                name="paypal_email"
+                                                                id="paypal_email"
+                                                                class="form-control"
+                                                                value="{{ old('paypal_email', $bankDetail->paypal_email ?? '') }}"
+                                                                placeholder="Enter Paypal Email">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-end">
+                                                        <button class="btn btn-solid"
+                                                            id="payout_btn"
+                                                            type="submit">
+                                                            Save
+                                                        </button>
+                                                    </div>
+
+                                                </form>
                                         </div>
                                     </div>
                                 </div>
@@ -423,13 +378,13 @@
                                     <div class="total-contain wallet-bg">
                                         <div class="wallet-point-box">
                                             <div class="total-image">
-                                                <img src="../assets/images/dashboard/balance.png" alt=""
+                                                <img src="{{ asset('uploads/dashboard/points.png') }}" alt=""
                                                     class="img-fluid">
                                             </div>
                                             <div class="total-detail">
                                                 <div class="total-box">
                                                     <h5>Wallet Balance</h5>
-                                                    <h3>$8.46</h3>
+                                                    <h3>{{ $transactions->sum('amount') }}</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -451,136 +406,23 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                @forelse ($transactions as $transaction)
+                                                                    <tr>
+                                                                        <td>{{ $transaction->created_at->format('d M Y h:i A') }}</td>
+                                                                        <td>${{ number_format($transaction->amount, 2) }}</td>
+                                                                        <td>{{ $transaction->remark }}</td>
+                                                                        <td>
+                                                                            <div
+                                                                                class="badge bg-debit custom-badge rounded-0">
+                                                                                <span>Debit</span>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @empty
                                                                 <tr>
-                                                                    <td>06 Jul 2024
-                                                                        03:15:PM</td>
-                                                                    <td>$39.40</td>
-                                                                    <td>Wallet amount
-                                                                        successfully debited for Order #1017</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
+                                                                    <td colspan="4" class="text-center">No transactions found.</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>25 Jun 2024
-                                                                        06:34:PM</td>
-                                                                    <td>$375.00</td>
-                                                                    <td>Wallet amount
-                                                                        successfully debited for Order #1015</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>24 Jun 2024
-                                                                        02:29:PM</td>
-                                                                    <td>$34.44</td>
-                                                                    <td>Wallet amount
-                                                                        successfully debited for Order #1013</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        04:29:PM</td>
-                                                                    <td>$75.21</td>
-                                                                    <td>Wallet amount
-                                                                        successfully debited for Order #1010</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        03:57:PM</td>
-                                                                    <td>$30.52</td>
-                                                                    <td>Wallet amount
-                                                                        successfully debited for Order #1009</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        03:48:PM</td>
-                                                                    <td>$109.97</td>
-                                                                    <td>Wallet amount
-                                                                        successfully debited for Order #1006</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        03:42:PM</td>
-                                                                    <td>$323.00</td>
-                                                                    <td>Admin has credited
-                                                                        the balance.</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-credit custom-badge rounded-0">
-                                                                            <span>Credit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        03:41:PM</td>
-                                                                    <td>$250.00</td>
-                                                                    <td>Admin has debited
-                                                                        the balance.</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-debit custom-badge rounded-0">
-                                                                            <span>Debit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        03:41:PM</td>
-                                                                    <td>$500.00</td>
-                                                                    <td>Admin has credited
-                                                                        the balance.</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-credit custom-badge rounded-0">
-                                                                            <span>Credit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>21 Jun 2024
-                                                                        03:41:PM</td>
-                                                                    <td>$100.00</td>
-                                                                    <td>Admin has credited
-                                                                        the balance.</td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="badge bg-credit custom-badge rounded-0">
-                                                                            <span>Credit</span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                                @endforelse
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -631,18 +473,13 @@
                                     <div class="total-contain wallet-bg">
                                         <div class="wallet-point-box">
                                             <div class="total-image">
-                                                <img src="../assets/images/dashboard/points.png" alt=""
+                                                <img src="{{ asset('uploads/dashboard/points.png') }}" alt=""
                                                     class="img-fluid">
                                             </div>
                                             <div class="total-detail">
                                                 <div class="total-box">
                                                     <h5>Total Points</h5>
-                                                    <h3>1970</h3>
-                                                </div>
-                                                <div class="point-ratio">
-                                                    <h3 class="counter"><i class="ri-information-line"></i>
-                                                        1 Points =
-                                                        $0.03 Balance </h3>
+                                                    <h3>{{ $orders->sum('price') }}</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -661,68 +498,59 @@
                                                             <th>Status</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr class="">
-                                                            <td>06 Jul 2024 03:15:PM</td>
-                                                            <td>$39.40</td>
-                                                            <td>Wallet amount successfully debited for Order #1017</td>
-                                                            <td>
-                                                                <div class="badge bg-debit custom-badge rounded-0">
-                                                                    <span>Debit</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>25 Jun 2024 06:34:PM</td>
-                                                            <td>$375.00</td>
-                                                            <td>Wallet amount successfully debited for Order #1015</td>
-                                                            <td>
-                                                                <div class="badge bg-debit custom-badge rounded-0">
-                                                                    <span>Debit</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>24 Jun 2024 02:29:PM</td>
-                                                            <td>$34.44</td>
-                                                            <td>Wallet amount successfully debited for Order #1013</td>
-                                                            <td>
-                                                                <div class="badge bg-debit custom-badge rounded-0">
-                                                                    <span>Debit</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>21 Jun 2024 04:29:PM</td>
-                                                            <td>$75.21</td>
-                                                            <td>Wallet amount successfully debited for Order #1010</td>
-                                                            <td>
-                                                                <div class="badge bg-debit custom-badge rounded-0">
-                                                                    <span>Debit</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>21 Jun 2024 03:57:PM</td>
-                                                            <td>$30.52</td>
-                                                            <td>Wallet amount successfully debited for Order #1009</td>
-                                                            <td>
-                                                                <div class="badge bg-debit custom-badge rounded-0">
-                                                                    <span>Debit</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>21 Jun 2024 03:41:PM</td>
-                                                            <td>$500.00</td>
-                                                            <td>Admin has credited the balance.</td>
-                                                            <td>
-                                                                <div class="badge bg-credit custom-badge rounded-0">
-                                                                    <span>Credit</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+                                                        <tbody>
+
+                                                            @forelse ($transactions as $transaction)
+
+                                                                <tr>
+
+                                                                    {{-- Date --}}
+                                                                    <td>
+                                                                        {{ $transaction->created_at->format('d M Y g:i A') }}
+                                                                    </td>
+
+                                                                    {{-- Amount --}}
+                                                                    <td>
+                                                                        ${{ number_format($transaction->amount, 2) }}
+                                                                    </td>
+
+                                                                    {{-- Description --}}
+                                                                    <td>
+                                                                        {{ $transaction->description }}
+                                                                    </td>
+
+                                                                    {{-- Type --}}
+                                                                    <td>
+
+                                                                        @if($transaction->type === 'debit')
+
+                                                                            <div class="badge bg-debit custom-badge rounded-0">
+                                                                                <span>Debit</span>
+                                                                            </div>
+
+                                                                        @else
+
+                                                                            <div class="badge bg-success custom-badge rounded-0">
+                                                                                <span>Credit</span>
+                                                                            </div>
+
+                                                                        @endif
+
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            @empty
+
+                                                                <tr>
+                                                                    <td colspan="4" class="text-center">
+                                                                        No wallet transactions found.
+                                                                    </td>
+                                                                </tr>
+
+                                                            @endforelse
+
+                                                        </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -780,146 +608,40 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1020</span></td>
-                                                                <td>06 Jul 2024 03:51:PM
-                                                                </td>
-                                                                <td>$61.73</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1017</span></td>
-                                                                <td>06 Jul 2024 03:15:PM
-                                                                </td>
-                                                                <td>$1.97</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1016</span></td>
-                                                                <td>26 Jun 2024 10:23:AM
-                                                                </td>
-                                                                <td>$46.14</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1015</span></td>
-                                                                <td>25 Jun 2024 06:34:PM
-                                                                </td>
-                                                                <td>$18.75</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1013</span></td>
-                                                                <td>24 Jun 2024 02:29:PM
-                                                                </td>
-                                                                <td>$1.72</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1012</span></td>
-                                                                <td>21 Jun 2024 05:18:PM
-                                                                </td>
-                                                                <td>$6.23</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1011</span></td>
-                                                                <td>21 Jun 2024 05:18:PM
-                                                                </td>
-                                                                <td>$39.72</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1010</span></td>
-                                                                <td>21 Jun 2024 04:29:PM
-                                                                </td>
-                                                                <td>$3.76</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1009</span></td>
-                                                                <td>21 Jun 2024 03:57:PM
-                                                                </td>
-                                                                <td>$1.52</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="fw-bolder">#1006</span></td>
-                                                                <td>21 Jun 2024 03:48:PM
-                                                                </td>
-                                                                <td>$5.49</td>
-                                                                <td>
-                                                                    <div
-                                                                        class="badge bg-pending custom-badge rounded-0">
-                                                                        <span>Pending</span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>COD</td>
-                                                                <td><a href="#!"><i class="ri-eye-line"></i></a></td>
-                                                            </tr>
+                                                                @forelse ($orders as $order)
+                                                                <tr>
+                                                                    <td><span class="fw-bolder">#{ $order->id }</span></td>
+                                                                    <td>{{ $order->created_at->format('d M Y g:i A') }}</td>
+                                                                    <td>${{ number_format($order->total, 2) }}</td>
+                                                                    <td class="order-status">
+
+                                                                        @if($order->status == 'pending')
+                                                                            <span class="status-badge status-pending">Pending</span>
+
+                                                                        @elseif($order->status == 'processing')
+                                                                            <span class="status-badge status-processing">Processing</span>
+
+                                                                        @elseif($order->status == 'completed')
+                                                                            <span class="status-badge status-completed">Completed</span>
+
+                                                                        @elseif($order->status == 'cancelled')
+                                                                            <span class="status-badge status-cancelled">Cancelled</span>
+
+                                                                        @endif
+
+                                                                    </td>
+                                                                    <td>{{ $order->payment_method }}</td>
+                                                                    <td><a href="#!"><i class="ri-eye-line"></i></a></td>
+                                                                </tr>
+                                                                    @empty
+                                                                    <tr>
+                                                                        <td colspan="6" class="text-center">
+
+                                                                                No orders found.
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    @endforelse
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1468,4 +1190,5 @@ document.addEventListener('DOMContentLoaded', function () {
     @endif
     });
 </script>
+
 @endsection
