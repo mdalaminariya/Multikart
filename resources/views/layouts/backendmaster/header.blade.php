@@ -34,7 +34,10 @@
                                 <i data-feather="maximize-2"></i>
                             </a>
                         </li>
-                        <li class="onhover-dropdown">
+
+                        {{-- **Language** --}}
+                        
+                        {{-- <li class="onhover-dropdown">
                             <a class="txt-dark" href="javascript:void(0)">
                                 <h6>EN</h6>
                             </a>
@@ -56,7 +59,8 @@
                                         <i class="flag-icon flag-icon-nz"></i>French</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
+
                         <li class="onhover-dropdown">
                             <i data-feather="bell"></i>
                             <span class="badge badge-pill badge-primary pull-right notification-badge">3</span>

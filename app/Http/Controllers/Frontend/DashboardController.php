@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $transactions = WalletTransaction::where('user_id', $user->id)->latest()->get();
         $user = auth()->user()->load('addresses');
         $bankDetail = BankDetail::where('user_id', auth()->id())->first();
-        return view('frontend.dashboard.index', compact('user', 'orders', 'transactions', 'bankDetail'));
+        return view('frontend.account.dashboard.index', compact('user', 'orders', 'transactions', 'bankDetail'));
     }
 
 public function update(Request $request)

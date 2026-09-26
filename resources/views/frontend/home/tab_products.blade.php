@@ -57,9 +57,39 @@
 
                                                         {{-- ACTIONS --}}
                                                         <div class="cart-info">
-                                                            <a href="#!" class="wishlist-icon">
-                                                                <i class="ri-heart-line"></i>
-                                                            </a>
+                                                        <form action="{{ route('wishlist.toggle') }}"
+                                                            method="POST"
+                                                            class="wishlist-form">
+
+                                                            @csrf
+
+                                                            <input type="hidden"
+                                                                name="product_id"
+                                                                value="{{ $product->id }}">
+
+                                                            <input type="hidden"
+                                                                name="product_type"
+                                                                value="{{ $product->type }}">
+
+                                                            <button type="submit"
+                                                                class="wishlist-icon border-0 bg-transparent p-0">
+
+                                                                @php
+                                                                    $isWishlisted = false;
+
+                                                                    if (auth()->check()) {
+                                                                        $isWishlisted = \App\Models\Wishlist::where('user_id', auth()->id())
+                                                                            ->where('product_id', $product->id)
+                                                                            ->where('product_type', $product->type)
+                                                                            ->exists();
+                                                                    }
+                                                                @endphp
+
+                                                                <i class="{{ $isWishlisted ? 'ri-heart-fill' : 'ri-heart-line' }}"></i>
+
+                                                            </button>
+
+                                                        </form>
 
                                                             <button data-bs-toggle="modal"
                                                                     data-bs-target="#addtocart">
@@ -72,7 +102,8 @@
                                                                 <i class="ri-eye-line"></i>
                                                             </a>
 
-                                                            <a href="compare.html">
+                                                            <a href="{{ route('compare.add', [$product->type, $product->id]) }}"
+                                                                title="Compare">
                                                                 <i class="ri-loop-left-line"></i>
                                                             </a>
                                                         </div>
@@ -108,7 +139,7 @@
 
                                                             <h4 class="price">
                                                                 ${{ $product->price }}
-                                                                    <del>${{ $product->discount }}</del>
+                                                                    <del>${{ $product->original_price }}</del>
 
                                                                 @if($product->discount)
                                                                     <span class="discounted-price">

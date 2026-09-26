@@ -114,7 +114,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="{{ route('admin.digital.product.view') }}">
+                                    <a href="{{ route('admin.digital.productlist.view') }}">
                                         <i class="fa fa-circle"></i>
                                         Product List
                                     </a>
@@ -259,91 +259,6 @@
             @endif
 
 
-            {{-- ========================================================= --}}
-            {{-- PAGES --}}
-            {{-- Admin + Manager only --}}
-            {{-- ========================================================= --}}
-            @if (in_array($userRole, ['admin', 'manager']))
-
-                <li>
-                    <a class="sidebar-header" href="javascript:void(0)">
-                        <i data-feather="clipboard"></i>
-                        <span>Pages</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-
-                    <ul class="sidebar-submenu">
-
-                        <li>
-                            <a href="{{ route('admin.pages.index') }}">
-                                <i class="fa fa-circle"></i>
-                                List Page
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('admin.pages.create') }}">
-                                <i class="fa fa-circle"></i>
-                                Create Page
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-            @endif
-
-
-            {{-- ========================================================= --}}
-            {{-- MEDIA --}}
-            {{-- Admin + Manager --}}
-            {{-- ========================================================= --}}
-            @if (in_array($userRole, ['admin', 'manager']))
-
-                <li>
-                    <a class="sidebar-header" href="{{ route('admin.media.index') }}">
-                        <i data-feather="camera"></i>
-                        <span>Media</span>
-                    </a>
-                </li>
-
-            @endif
-
-
-            {{-- ========================================================= --}}
-            {{-- MENUS --}}
-            {{-- Admin + Manager --}}
-            {{-- ========================================================= --}}
-            @if (in_array($userRole, ['admin', 'manager']))
-
-                <li>
-                    <a class="sidebar-header" href="javascript:void(0)">
-                        <i data-feather="align-left"></i>
-                        <span>Menus</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-
-                    <ul class="sidebar-submenu">
-
-                        <li>
-                            <a href="{{ route('admin.menu.index') }}">
-                                <i class="fa fa-circle"></i>
-                                Menu Lists
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('admin.menu.create') }}">
-                                <i class="fa fa-circle"></i>
-                                Create Menu
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-            @endif
-
 
             {{-- ========================================================= --}}
             {{-- USERS --}}
@@ -430,58 +345,6 @@
 
             @endif --}}
 
-
-            {{-- ========================================================= --}}
-            {{-- LOCALIZATION --}}
-            {{-- Admin + Manager only --}}
-            {{-- ========================================================= --}}
-            @if (in_array($userRole, ['admin', 'manager']))
-
-                <li>
-                    <a class="sidebar-header" href="javascript:void(0)">
-                        <i data-feather="chrome"></i>
-                        <span>Localization</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-
-                    <ul class="sidebar-submenu">
-
-                        <li>
-                            <a href="translations.html">
-                                <i class="fa fa-circle"></i>
-                                Translations
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="currency-rates.html">
-                                <i class="fa fa-circle"></i>
-                                Currency Rates
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="taxes.html">
-                                <i class="fa fa-circle"></i>
-                                Taxes
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-            @endif
-
-
-            {{-- Support --}}
-            <li>
-                <a class="sidebar-header" href="support-ticket.html">
-                    <i data-feather="phone"></i>
-                    <span>Support Ticket</span>
-                </a>
-            </li>
-
-
             {{-- Reports --}}
             @if (in_array($userRole, ['admin', 'manager']))
 
@@ -518,19 +381,6 @@
                         </li>
 
                     </ul>
-                </li>
-
-            @endif
-
-
-            {{-- Invoice --}}
-            @if (in_array($userRole, ['admin', 'manager']))
-
-                <li>
-                    <a class="sidebar-header" href="invoice.html">
-                        <i data-feather="archive"></i>
-                        <span>Invoice</span>
-                    </a>
                 </li>
 
             @endif

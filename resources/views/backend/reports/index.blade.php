@@ -125,9 +125,7 @@
 
             {{-- Expenses --}}
             <div class="col-lg-6">
-
                 <div class="card">
-
                     <div class="card-header">
                         <h5>Expenses</h5>
                     </div>
@@ -135,9 +133,7 @@
                     <div class="card-body expense-chart">
                         <canvas id="expenseChart"></canvas>
                     </div>
-
                 </div>
-
             </div>
 
             {{-- Sales Purchase --}}
@@ -361,5 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+
 
 @endsection

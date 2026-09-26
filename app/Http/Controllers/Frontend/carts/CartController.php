@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Physical\Product\Product as PhysicalProduct;
 use App\Models\Digital\Product\Product as DigitalProduct;
 use App\Models\Cart;
+use App\Models\Order;
 
 class CartController extends Controller
 {
@@ -18,9 +19,16 @@ public function index()
         return $item->price * $item->quantity;
     });
 
-    return view('frontend.carts.index', compact(
+    $user = auth()->user();
+    
+        $order = Order::where('user_id', $user->id)
+        ->latest()
+        ->first();
+
+    return view('frontend.account.carts.index', compact(
         'cartItems',
-        'cartTotal'
+        'cartTotal',
+        'order'
     ));
 }
 public function add(Request $request, $type, $id)

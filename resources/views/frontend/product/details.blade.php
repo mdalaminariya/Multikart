@@ -83,7 +83,7 @@
                                     <a href="#!">{{ $totalReviews }} Reviews</a>
                                 </div>
                             <div class="price-text">
-                                <h3><span class="fw-normal">MRP:</span> $ {{ $product->price }} </h3>
+                                <h3><span class="fw-normal"></span> $ {{ $product->price }} </h3>
                                     @if(!empty($product->original_price))
                                         <del>${{ $product->original_price }}</del>
                                         @endif
@@ -637,29 +637,72 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="product-detail">
-                            <div>
-                                <div class="brand-w-color">
-                                    <a class="product-title" href="product-page(accordian).html">
-                                        Glamour Gaze
-                                    </a>
 
-                                </div>
-                                <h6>Purple Mini Dress</h6>
-                                <h4 class="price">$ 4.34<del> $5.00 </del><span class="discounted-price">
-                                        5% Off
-                                    </span>
-                                </h4>
-                            </div>
-                            <ul class="offer-panel">
-                                <li><span class="offer-icon"><i class="ri-discount-percent-fill"></i></span>
-                                    Limited Time Offer: 5% off</li>
-                                <li><span class="offer-icon"><i class="ri-discount-percent-fill"></i></span>
-                                    Limited Time Offer: 5% off</li>
-                                <li><span class="offer-icon"><i class="ri-discount-percent-fill"></i></span>
-                                    Limited Time Offer: 5% off</li>
-                            </ul>
-                        </div>
+<div class="product-detail">
+    <div>
+        <div class="brand-w-color">
+            <a class="product-title"
+                href="{{ route('product.details', [$product->type, $product->id]) }}">
+                {{ $product->brand ?? 'Brand' }}
+            </a>
+        </div>
+
+        <h6>{{ $product->title }}</h6>
+
+        @php
+            $currentPrice = (float) ($product->price ?? 0);
+            $originalPrice = (float) ($product->original_price ?? 0);
+
+            $discount = 0;
+
+            if ($originalPrice > 0 && $originalPrice > $currentPrice) {
+                $discount = round(
+                    (($originalPrice - $currentPrice) / $originalPrice) * 100
+                );
+            }
+        @endphp
+
+        <h4 class="price">
+            ${{ number_format($currentPrice, 2) }}
+
+            @if ($discount > 0)
+                <del>
+                    ${{ number_format($originalPrice, 2) }}
+                </del>
+
+                <span class="discounted-price">
+                    {{ $discount }}% Off
+                </span>
+            @endif
+        </h4>
+    </div>
+
+    <ul class="offer-panel">
+        @if ($discount > 0)
+            <li>
+                <span class="offer-icon">
+                    <i class="ri-discount-percent-fill"></i>
+                </span>
+                Limited Time Offer: {{ $discount }}% off
+            </li>
+
+            <li>
+                <span class="offer-icon">
+                    <i class="ri-discount-percent-fill"></i>
+                </span>
+                Limited Time Offer: {{ $discount }}% off
+            </li>
+
+            <li>
+                <span class="offer-icon">
+                    <i class="ri-discount-percent-fill"></i>
+                </span>
+                Limited Time Offer: {{ $discount }}% off
+            </li>
+        @endif
+    </ul>
+</div>
+
                     </div>
                 </div>
 

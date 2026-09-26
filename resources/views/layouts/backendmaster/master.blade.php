@@ -223,9 +223,6 @@
     <!--chartjs js-->
     <script src="{{ asset('backend') }}/assets/js/chart/chartjs/chart.min.js"></script>
 
-    <!-- lazyload js-->
-    <script src="{{ asset('backend') }}/assets/js/lazysizes.min.js"></script>
-
     <!--copycode js-->
     <script src="{{ asset('backend') }}/assets/js/prism/prism.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/clipboard/clipboard.min.js"></script>
@@ -257,6 +254,9 @@
     <script src="{{ asset('backend') }}/assets/js/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/datatables/custom-basic.js"></script>
 
+    <!-- Google chart js-->
+    <script src="{{ asset('backend') }}/assets/js/chart/google/google-chart-loader.js"></script>
+
     <!--Customizer admin-->
     <script src="{{ asset('backend') }}/assets/js/admin-customizer.js"></script>
 
@@ -276,6 +276,12 @@
     <!--script admin-->
     <script src="{{ asset('backend') }}/assets/js/admin-script.js"></script>
 
+    <!--Report chart-->
+    <script src="{{ asset('backend') }}/assets/js/admin-reports.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    
     <!-- JS Toastify -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 

@@ -184,6 +184,22 @@ class OrderController extends Controller
             abort(403);
         }
 
-        return view('frontend.carts.order-success', compact('order'));
+        return view('frontend.account.carts.order-success', compact('order'));
     }
+
+    public function tracking($id)
+{
+    $order = Order::with([
+        'items.physicalProduct',
+        'items.digitalProduct',
+    ])
+        ->where('user_id', auth()->id())
+        ->findOrFail($id);
+
+    $orders = Order::where('user_id', auth()->id())
+        ->latest()
+        ->get();
+
+    return view('frontend.account.OrderTracking.index', compact('order', 'orders'));
+}
 }

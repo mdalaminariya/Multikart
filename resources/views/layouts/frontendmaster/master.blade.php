@@ -28,6 +28,9 @@
     <!-- Animate icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/assets/css/vendors/animate.css">
 
+        <!-- Price range icon -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/assets/css/vendors/price-range.css">
+
     <!-- Themify icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/assets/css/vendors/themify-icons.css">
 
@@ -93,7 +96,7 @@
     @yield('content')
 
     {{-- Cart Sidebar --}}
-    @include('frontend.carts.cart')
+    @include('frontend.account.carts.cart')
 
 <!-- Footer Section Start -->
     @include('layouts.frontendmaster.footer')
@@ -528,6 +531,9 @@
 
 <!-- Fly cart js-->
 <script src="{{ asset('frontend') }}/assets/js/fly-cart.js"></script>
+
+<!-- price range js -->
+<script src="{{ asset('frontend') }}/assets/js/price-range.js"></script>
 
 <!-- Theme js-->
 <script src="{{ asset('frontend') }}/assets/js/theme-setting.js"></script>

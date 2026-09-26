@@ -16,6 +16,11 @@ use App\Http\Controllers\Auth\UserAuthenticationController;
 use App\Http\Controllers\Frontend\WalletController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\DashboardController;
+use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\CompareController;
+use App\Http\Controllers\Frontend\SearchController;
+use App\Http\Controllers\Frontend\QuickViewController;
 use App\Http\Controllers\Backend\Physical\CategoryController;
 use App\Http\Controllers\Backend\Physical\SubCategoryController;
 use App\Http\Controllers\Backend\Digital\CategoryController as DigitalCategoryController;
@@ -28,15 +33,64 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//Frontend Routes start here
+    //Frontend Routes start here
 
-// Home route
-Route::get('/', [HomeController::class, 'index'])->name('home');
+    // Home route
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Product Details route (for both physical and digital products)
-Route::get('/product/{type}/{id}', [HomeController::class, 'productDetails'])->name('product.details');
+    // Shop route
+    Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 
-//Cart routes
+    // Product Details route (for both physical and digital products)
+    Route::get('/product/{type}/{id}', [HomeController::class, 'productDetails'])->name('product.details');
+
+    // wish list
+
+    Route::middleware('auth')->group(function () {
+
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+
+    Route::delete('/wishlist/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+    });
+
+// Contact route
+
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+    // Order success route
+    Route::middleware('auth')->group(function () {
+    Route::get('/order-success/{id}', [OrderController::class, 'success'])
+        ->name('order.success');
+
+    Route::get('/order-tracking/{id}', [OrderController::class, 'tracking'])
+        ->name('order.tracking');
+    });
+
+    Route::get('/quick-view/{type}/{id}', [QuickViewController::class, 'show'])
+    ->name('quickview.show');
+    // search route
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+    // compare route
+    Route::get('/compare', [CompareController::class, 'index'])
+    ->name('compare.index');
+
+    Route::get('/compare/add/{type}/{id}', [CompareController::class, 'add'])
+        ->name('compare.add');
+
+    Route::get('/compare/remove/{type}/{id}', [CompareController::class, 'remove'])
+        ->name('compare.remove');
+
+    Route::get('/compare/clear', [CompareController::class, 'clear'])
+        ->name('compare.clear');
+
+    //Cart routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::get('/cart/add/{type}/{id}', [CartController::class, 'add'])->name('cart.add');
@@ -60,13 +114,22 @@ Route::get('/product/{type}/{id}', [HomeController::class, 'productDetails'])->n
     Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
 
     Route::post('/vendor/profile/update', [VendorController::class, 'vendorProfileUpdate'])->name('vendor.profile.update');
-    
+
     Route::post('/vendor/settings/notifications', [VendorController::class, 'updateNotifications'])->name('vendor.settings.notifications');
 
     Route::post('/vendor/settings/deactivate', [VendorController::class, 'deactivate'])->name('vendor.settings.deactivate');
 
     Route::post('/vendor/settings/delete', [VendorController::class, 'deleteAccount'])->name('vendor.settings.delete');
-});
+
+    //vendor profile
+    Route::get('/vendor/dashboard', [VendorController::class, 'index'])
+        ->name('vendor.dashboard');
+
+    Route::get('/vendor/profile', [VendorController::class, 'vendorprofile'])
+        ->name('vendor.profile');
+
+        });
+
 
 //User dashboard route
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -102,7 +165,8 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('/', [BackendController::class, 'index'])->name('dashboard');
 
     Route::middleware(['rolecheck'])->group(function () {
-        //products physical
+
+    //products physical
     //category routes
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
@@ -126,9 +190,10 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('product/delete/{id}',[ProductController::class,'delete'])->name('product.delete');
     Route::get('product/details/{id}',[ProductController::class,'details'])->name('product.details');
 
-    //Digital Physical
+    //Digital
     Route::get('/digital/category', [DigitalCategoryController::class, 'index'])->name('digital.category.index');
     Route::post('/digital/category/store', [DigitalCategoryController::class, 'store'])->name('digital.category.store');
+    Route::get('/digital/product/view',[DigitalProductController::class,'view'])->name('digital.product.view');
     Route::get('/digital/category/edit/{id}', [DigitalCategoryController::class, 'edit'])->name('digital.category.edit');
     Route::post('/digital/category/update/{id}', [DigitalCategoryController::class, 'update'])->name('digital.category.update');
     Route::get('/digital/category/delete/{id}', [DigitalCategoryController::class, 'delete'])->name('digital.category.delete');
@@ -144,7 +209,7 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('/digital/product',[DigitalProductController::class,'index'])->name('digital.product.index');
     Route::post('/digital/product/store',[DigitalProductController::class,'store'])->name('digital.product.store');
     Route::post('/digital/product/upload', [DigitalProductController::class, 'upload'])->name('digital.product.upload');
-    Route::get('/digital/product/view',[DigitalProductController::class,'view'])->name('digital.product.view');
+    Route::get('/digital/product/view',[DigitalProductController::class,'ProductlistView'])->name('digital.productlist.view');
     Route::get('/digital/product/edit/{id}',[DigitalProductController::class, 'edit'])->name('digital.product.edit');
     Route::put('/digitalproduct/update/{id}',[DigitalProductController::class,'update'])->name('digital.product.update');
     Route::get('/digitalproduct/delete/{id}',[DigitalProductController::class,'delete'])->name('digital.product.delete');

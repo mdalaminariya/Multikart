@@ -41,11 +41,6 @@ public function store(Request $request)
 
     return back()->with('success', 'Category created successfully!');
 }
-public function edit($id)
-{
-    $categories = Category::where('id', $id)->first();
-    return view('backend.products.physical.category.edit', compact('categories'));
-}
 
 public function update(Request $request, $id)
 {

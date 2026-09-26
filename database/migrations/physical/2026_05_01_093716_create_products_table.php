@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('subcategory_id')->constrained('subcategories')->onDelete('cascade');
             $table->string('title');
+            $table->text('brand')->nullable();
             $table->string('product_code')->unique();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->decimal('Original_price', 10, 2);
             $table->decimal('price', 10, 2);
-            $table->decimal('discount', 10, 2)->nullable();
+            $table->decimal('discount', 5, 2)->nullable();
             $table->string('colors')->nullable();
             $table->integer('quantity')->default(1);
             $table->string('size')->nullable();
+
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('inactive');

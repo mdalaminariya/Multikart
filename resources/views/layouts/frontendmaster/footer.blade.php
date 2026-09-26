@@ -5,7 +5,7 @@
                 <div class="col-xl-3 col-lg-5 col-md-6 sub-title">
                     <div>
                         <div class="footer-logo"><a href="index.html"><img alt="logo" class="img-fluid"
-                                                                           src="assets/images/logo-white.png">
+                                                                           src="{{ asset('frontend') }}/assets/images/favicon.png">
                             </a></div>
                         <p> Discover the latest trends and enjoy seamless shopping
                             with our exclusive collections.

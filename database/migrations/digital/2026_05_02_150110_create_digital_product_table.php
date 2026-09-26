@@ -12,28 +12,24 @@ return new class extends Migration
   public function up(): void
 {
     Schema::create('digital_products', function (Blueprint $table) {
-        $table->id();
+            $table->id();
+            $table->foreignId('subcategory_id')->constrained('digital_subcategories')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
 
-        // Subcategory relation
-        $table->foreignId('subcategory_id')->constrained('digital_subcategories')->onDelete('cascade');
-        $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->string('title');
+            $table->text('brand')->nullable();
+            $table->string('product_code')->unique();
+            $table->decimal('Original_price', 10, 2);
+            $table->decimal('price', 10, 2);
+            $table->decimal('discount', 5, 2)->nullable();
+            $table->string('colors')->nullable();
+            $table->integer('quantity')->default(1);
+            $table->string('size')->nullable();
 
-        // Basic product info
-        $table->string('title');
-        $table->string('sku')->unique();
-        $table->text('short_summary')->nullable();
-        $table->longText('description')->nullable();
-        $table->string('images')->nullable();
-        $table->decimal('price', 10, 2);
-        $table->integer('quantity')->default(1);
-        $table->text('sizes')->nullable();
-        $table->enum('status',['enable','disable'])->default('disable');
-        $table->text('colors')->nullable();
-
-        // SEO fields
-        $table->string('meta_title')->nullable();
-        $table->text('meta_description')->nullable();
-        $table->timestamps();
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->timestamps();
     });
 }
 

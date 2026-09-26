@@ -25,7 +25,7 @@ class CheckoutController extends Controller
 
         $total = $subTotal + $shipping + $tax;
 
-        return view('frontend.carts.checkout.index', compact(
+        return view('frontend.account.carts.Checkout.index', compact(
             'cartItems',
             'subTotal',
             'shipping',

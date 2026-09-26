@@ -36,11 +36,6 @@ class CategoryController extends Controller
         ]);
         return back()->with('success', 'Category created successfully!');
     }
-public function edit($id)
-{
-    $categories = Category::where('id', $id)->first();
-    return view('backend.products.digital.category.edit', compact('categories'));
-}
 
 public function update(Request $request, $id)
 {

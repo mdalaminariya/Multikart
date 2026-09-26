@@ -109,6 +109,25 @@
                                                         </div>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
+
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom01"
+                                                            class="col-xl-3 col-sm-4 mb-0">Brand :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="brand" class="form-control" id="validationCustom01"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom02"
+                                                            class="col-xl-3 col-sm-4 mb-0">Original Price :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="original_price" class="form-control" id="validationCustom02"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
                                                     <div class="form-group mb-3 row">
                                                         <label for="validationCustom02"
                                                             class="col-xl-3 col-sm-4 mb-0">Price :</label>

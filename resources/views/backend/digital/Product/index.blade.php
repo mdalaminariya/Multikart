@@ -1,291 +1,357 @@
 @extends('layouts.backendmaster.master')
 
 @section('content')
-
-<div class="page-body">
-    <div class="container-fluid">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="page-header-left">
-                        <h3>Add Products
-                            <small>Multikart Admin panel</small>
-                        </h3>
+  <div class="page-body">
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Add Products
+                                        <small>Multikart Admin panel</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ol class="breadcrumb pull-right">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html">
+                                            <i data-feather="home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item">Physical</li>
+                                    <li class="breadcrumb-item active">Add Product</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+                <!-- Container-fluid Ends-->
 
-    <!-- FORM START -->
-    <form action="{{ route('admin.digital.product.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row product-adding">
+                                        <div class="col-xl-5">
+                                            <div class="add-product">
+                                                <div class="row">
+                                                    <div class="col-xl-9 xl-50 col-sm-6 col-9">
+                                                        <div class="zoom-box">
+                                                        <img id="Multikart" src="{{ asset('backend') }}/assets/images/pro3/1.jpg"
+                                                            alt="" class="img-fluid image_zoom_1 blur-up lazyloaded">
+                                                            </div>
+                                                        </div>
 
-        <div class="container-fluid">
-            <div class="row product-adding">
+                                                    <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                        <ul class="file-upload-product">
 
-                <!-- LEFT SIDE -->
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>General</h5>
-                        </div>
+                                                            {{-- MAIN IMAGE --}}
+                                                            <li>
+                                                                <div class="box-input-file">
+                                                                    <input type="file" name="image" class="upload"  form="productForm"
+                                                                        onchange="previewMainBox(this)"
+                                                                        required>
 
-                        <div class="card-body">
-                            <div class="digital-add needs-validation">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </div>
+                                                            </li>
 
-                                <!-- TITLE -->
-                                <div class="form-group">
-                                    <label class="col-form-label pt-0"><span>*</span> Title</label>
-                                    <input name="title" class="form-control" type="text" required>
-                                </div>
+                                                            {{-- NEXT 4 BOXES = MULTIPLE IMAGES --}}
+                                                            @for($i = 0; $i < 4; $i++)
+                                                            <li>
+                                                                <div class="box-input-file">
+                                                                    <input type="file" name="images[]" onchange="previewMultiple(this)"
+                                                                        form="productForm" class="upload">
 
-                                <!-- SKU -->
-                                <div class="form-group">
-                                    <label class="col-form-label pt-0"><span>*</span> SKU</label>
-                                    <input name="sku" class="form-control" type="text" required>
-                                </div>
+                                                                    <i class="fa fa-plus"></i>
+                                                                </div>
+                                                            </li>
+                                                            @endfor
 
-                                <!-- CATEGORY -->
-                                <div class="form-group">
-                                    <label class="col-form-label categories-basic"><span>*</span> Categories</label>
-                                    <select name="subcategory_id" class="custom-select form-control" required>
-                                        <option value="">--Select--</option>
-                                        @foreach($subcategories as $subcategory)
-                                            <option value="{{ $subcategory->id }}">
-                                                {{ $subcategory->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <form id="productForm" class="needs-validation add-product-form" action="{{ route('admin.digital.product.store') }}"
+                                                method="post"enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="form">
 
-                                <!-- SUMMARY -->
-                                <div class="form-group">
-                                    <label class="col-form-label">Sort Summary</label>
-                                    <textarea name="short_summary" rows="5" cols="12"></textarea>
-                                </div>
+                                                     <div class="form-group mb-3 row">
+                                                        <label for="validationCustomUsername"
+                                                            class="col-xl-3 col-sm-4 mb-0">SubCategory :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                           <select name="subcategory_id" id="subcategory_select" class="col-xl-8 col-sm-7 form-control">
+                                                            @forelse($subcategories as $subcategory)
+                                                                <option value="{{ $subcategory->id }}">
+                                                                    {{ $subcategory->name }}
+                                                                </option>
+                                                            @empty
+                                                                <option disabled>No subcategories found</option>
+                                                            @endforelse
+                                                        </select>
+                                                        </div>
+                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Please
+                                                            choose Valid Code.</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom01"
+                                                            class="col-xl-3 col-sm-4 mb-0">Title :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="title" class="form-control" id="validationCustom01"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
 
-                                <!-- PRICE -->
-                                <div class="form-group">
-                                    <label class="col-form-label"><span>*</span> Product Price</label>
-                                    <input name="price" class="form-control" type="text" required>
-                                </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom01"
+                                                            class="col-xl-3 col-sm-4 mb-0">Brand :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="brand" class="form-control" id="validationCustom01"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom02"
+                                                            class="col-xl-3 col-sm-4 mb-0">Original Price :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="original_price" class="form-control" id="validationCustom02"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom02"
+                                                            class="col-xl-3 col-sm-4 mb-0">Price :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="price" class="form-control" id="validationCustom02"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom02"
+                                                            class="col-xl-3 col-sm-4 mb-0">Discount :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="discount" class="form-control" id="validationCustom02"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustomUsername"
+                                                            class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input name="product_code" class="form-control" id="validationCustomUsername"
+                                                                type="text" required="">
+                                                        </div>
+                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Please
+                                                            choose Valid Code.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form">
+                                                    <div class="form-group row">
+                                                        <label for="exampleFormControlSelect1"
+                                                            class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <select class="form-control digits"
+                                                                id="exampleFormControlSelect1"name="size">
+                                                                <option value="Small">Small</option>
+                                                                <option value="Medium">Medium</option>
+                                                                <option value="Large">Large</option>
+                                                                <option value="Extra Large">Extra Large</option>
 
-                                <!-- STATUS -->
-                                <div class="form-group">
-                                    <label class="col-form-label"><span>*</span> Status</label>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    {{-- quantitys --}}
+                                                       <div class="form-group row">
+                                                        <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
 
-                                    <div class="d-flex gap-3">
-                                        <label>
-                                            <input type="radio" name="status" value="1" class="radio_animated">
-                                            Enable
-                                        </label>
+                                                        <div class="col-xl-9 col-sm-7">
+                                                            <div class="d-inline-flex align-items-center border rounded" style="overflow:hidden; width:120px;">
 
-                                        <label>
-                                            <input type="radio" name="status" value="0" class="radio_animated">
-                                            Disable
-                                        </label>
+                                                                <button type="button" id="minusBtn"
+                                                                    style="border:none; background:#f5f5f5; width:35px; height:35px;">-</button>
+
+                                                                <input type="text" name="quantity" id="quantityInput"
+                                                                    value="1"
+                                                                    style="width:50px; text-align:center; border:none; outline:none;">
+
+                                                                <button type="button" id="plusBtn"
+                                                                    style="border:none; background:#f5f5f5; width:35px; height:35px;">+</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                      <!-- COLOR VARIANT -->
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-3 col-sm-4 mb-0">Product Colors :</label>
+
+                                                            <div class="col-xl-8 col-sm-7">
+
+                                                                <div class="d-flex flex-wrap align-items-center gap-2" id="colorWrapper">
+
+                                                                    <!-- Default row -->
+                                                                    <div class="d-flex align-items-center color-item">
+                                                                        <input type="color" name="colors[]" value="#000000"
+                                                                            class="form-control form-control-color"
+                                                                            style="width:60px;">
+
+                                                                        <button type="button"
+                                                                                class="btn btn-danger btn-sm ms-2 removeColor">
+                                                                            X
+                                                                        </button>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <button type="button"
+                                                                        class="btn btn-primary btn-sm mt-2"
+                                                                        id="addColor">
+                                                                    + Add Color
+                                                                </button>
+
+                                                            </div>
+                                                        </div>
+                                                   <div class="form-group row">
+                                                        <label class="col-xl-3 col-sm-4">Add Description :</label>
+                                                        <div class="col-xl-8 col-sm-7 description-sm">
+                                                            <textarea id="editor1" name="description" cols="10"
+                                                                rows="4"></textarea>
+                                                        </div>
+                                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                            <button type="submit" class="btn btn-primary">Add</button>
+                                                            <button type="button" class="btn btn-light">Discard</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- DROPZONE UPLOAD (REAL) -->
-                                <label class="col-form-label pt-0">Product Upload</label>
-
-                                <div class="product-upload-box" id="uploadBox">
-
-                                    <!-- Preview Image -->
-                                    <img id="previewImage"
-                                        style="width:100%; max-height:200px; object-fit:contain; display:none; margin-bottom:10px; border-radius:8px;">
-
-                                    <!-- Placeholder -->
-                                    <div id="uploadPlaceholder" style="text-align:center;">
-                                        <i class="fa fa-cloud-upload" style="font-size:40px;"></i>
-                                        <h4 class="mb-0 f-w-600">Click or drop image here</h4>
-                                    </div>
-
-                                    <!-- REAL FILE INPUT -->
-                                    <input type="file"
-                                        name="images"
-                                        id="fileInput"
-                                        accept="image/*"
-                                        style="position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer;">
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- RIGHT SIDE -->
-                <div class="col-xl-6">
-
-                    <!-- DESCRIPTION -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Add Description</h5>
-                        </div>
-
-                        <div class="card-body">
-                            <textarea id="editor1" name="description"></textarea>
-                        </div>
-                    </div>
-                    <!-- COLOR VARIANT -->
-                    <div class="form-group">
-                        <label class="col-form-label">Product Colors</label>
-
-                        <div id="colorWrapper" class="d-flex flex-wrap gap-2">
-
-                            <!-- Default -->
-                            <div class="d-flex align-items-center color-item">
-                                <input type="color" name="colors[]" value="#000000"
-                                    class="form-control form-control-color" style="width:60px;">
-
-                                <button type="button" class="btn btn-danger btn-sm ms-2 removeColor">X</button>
-                            </div>
-
-                        </div>
-
-                        <button type="button" class="btn btn-primary btn-sm mt-2" id="addColor">
-                            + Add Color
-                        </button>
-                    </div>
-
-                    {{-- Quantity --}}
-                 <div class="form-group row">
-                    <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
-
-                        <div class="col-xl-9 col-sm-7">
-                            <div class="d-inline-flex align-items-center border rounded" style="overflow:hidden; width:120px;">
-
-                                <button type="button" id="minusBtn"
-                                    style="border:none; background:#f5f5f5; width:35px; height:35px;">-</button>
-
-                                <input type="text" name="quantity" id="quantityInput"
-                                    value="1"
-                                    style="width:50px; text-align:center; border:none; outline:none;">
-
-                                <button type="button" id="plusBtn"
-                                    style="border:none; background:#f5f5f5; width:35px; height:35px;">+</button>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- META -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Meta Data</h5>
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="form-group">
-                                <label>Meta Title</label>
-                                <input name="meta_title" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Meta Description</label>
-                                <textarea name="meta_description" rows="4" class="form-control"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                    </div>
-
-                </div>
-
+                <!-- Container-fluid Ends-->
             </div>
-        </div>
-
-    </form>
-    <!-- FORM END -->
-</div>
-
 @endsection
-
 @section('script')
-
-{{-- TINYMCE --}}
+{{-- image --}}
 <script>
-tinymce.init({
-    selector: '#editor1'
-});
-</script>
 
-{{-- DROPZONE REAL --}}
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+// =========================
+// MAIN IMAGE + BIG PREVIEW
+// =========================
+function previewMainBox(input) {
 
-    let fileInput = document.getElementById("fileInput");
-    let preview = document.getElementById("previewImage");
-    let placeholder = document.getElementById("uploadPlaceholder");
-    let box = document.getElementById("uploadBox");
+    const file = input.files[0];
+    if (!file) return;
 
-    // colors
- let addBtn = document.getElementById("addColor");
+    const box = input.closest('.box-input-file');
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+        // =========================
+        // BIG IMAGE PREVIEW
+        // =========================
+        const mainPreview = document.getElementById('Multikart');
+        if (mainPreview) {
+            mainPreview.src = e.target.result;
+        }
+
+        // =========================
+        // BOX PREVIEW
+        // =========================
+        setBoxPreview(box, e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+// =========================
+// MULTIPLE IMAGES PREVIEW
+// =========================
+function previewMultiple(input) {
+
+    const file = input.files[0];
+    if (!file) return;
+
+    const box = input.closest('.box-input-file');
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        setBoxPreview(box, e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+let addBtn = document.getElementById("addColor");
 let wrapper = document.getElementById("colorWrapper");
 
+// ADD COLOR
 addBtn.addEventListener("click", function () {
 
-    let div = document.createElement("div");
-    div.className = "d-flex align-items-center color-item";
+    let html = `
+        <div class="d-flex align-items-center color-item">
+            <input type="color" name="colors[]" value="#000000"
+                   class="form-control form-control-color"
+                   style="width:60px;">
 
-    div.innerHTML = `
-        <input type="color" name="colors[]" value="#000000"
-            class="form-control form-control-color" style="width:60px;">
-        <button type="button" class="btn btn-danger btn-sm ms-2 removeColor">X</button>
+            <button type="button"
+                    class="btn btn-danger btn-sm ms-2 removeColor">
+                X
+            </button>
+        </div>
     `;
 
-    wrapper.appendChild(div);
+    wrapper.insertAdjacentHTML("beforeend", html);
 });
 
-// REMOVE
+// REMOVE COLOR
 wrapper.addEventListener("click", function (e) {
     if (e.target.classList.contains("removeColor")) {
         e.target.closest(".color-item").remove();
     }
 });
 
-    // FILE SELECT (CLICK)
-    fileInput.addEventListener("change", function () {
-        handleFile(this.files[0]);
-    });
+// =========================
+// REUSABLE BOX PREVIEW FUNCTION
+// =========================
+function setBoxPreview(box, src) {
 
-    // DRAG OVER
-    box.addEventListener("dragover", function (e) {
-        e.preventDefault();
-        box.style.borderColor = "#28a745";
-    });
+    const icon = box.querySelector('i');
+    if (icon) icon.style.display = 'none';
 
-    // DRAG LEAVE
-    box.addEventListener("dragleave", function () {
-        box.style.borderColor = "#ccc";
-    });
+    let img = box.querySelector('img');
 
-    // DROP FILE
-    box.addEventListener("drop", function (e) {
-        e.preventDefault();
-        fileInput.files = e.dataTransfer.files;
-        handleFile(e.dataTransfer.files[0]);
-    });
-
-    // SHOW PREVIEW FUNCTION
-    function handleFile(file) {
-        if (!file) return;
-
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            preview.src = e.target.result;
-            preview.style.display = "block";
-            placeholder.style.display = "none";
-        };
-        reader.readAsDataURL(file);
+    if (!img) {
+        img = document.createElement('img');
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '5px';
+        box.appendChild(img);
     }
 
-});
+    img.src = src;
+}
 
-// quantity
+//quantity
 
 let minus = document.getElementById("minusBtn");
 let plus = document.getElementById("plusBtn");
@@ -300,33 +366,55 @@ plus.addEventListener("click", function () {
     let value = parseInt(input.value) || 1;
     input.value = value + 1;
 });
+
 </script>
 
-{{-- TOAST --}}
+{{-- text editor --}}
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    tinymce.init({
+      selector: '#editor1',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+  </script>
 
-    @if ($errors->any())
-        Toastify({
-            text: "{{ $errors->first() }}",
-            duration: 4000,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#D21302",
-        }).showToast();
-    @endif
+  {{-- message notification --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
 
-    @if (session('success'))
-        Toastify({
-            text: "{{ session('success') }}",
-            duration: 3000,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#00b09b",
-        }).showToast();
-    @endif
+        @if ($errors->any())
+            Toastify({
+                text: "{{ $errors->first() }}",
+                duration: 4000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "linear-gradient(to right, #FF0112, #D21302)",
+            }).showToast();
+        @endif
 
-});
+        @if (session('success'))
+            Toastify({
+                text: "{{ session('success') }}",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            }).showToast();
+        @endif
+
+        @if (session('error'))
+            Toastify({
+                text: "{{ session('error') }}",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "linear-gradient(to right, #FF0112, #D21302)",
+            }).showToast();
+        @endif
+
+    });
 </script>
-
 @endsection

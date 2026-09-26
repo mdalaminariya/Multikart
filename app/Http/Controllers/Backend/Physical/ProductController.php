@@ -21,6 +21,7 @@ public function store(Request $request)
     $request->validate([
         'subcategory_id' => 'required',
         'title' => 'required',
+        'brand' => 'required',
         'product_code' => 'required|unique:products',
         'price' => 'required',
         'discount' => 'required',
@@ -43,9 +44,11 @@ public function store(Request $request)
     $product =Product::create([
         'subcategory_id' => $request->subcategory_id,
         'title' => $request->title,
+        'brand' => $request->brand,
         'product_code' => $request->product_code,
         'price' => $request->price,
-        'discount' => $request->discount,
+        'original_price' => $request->original_price,
+        'discount'       => $request->discount,
         'quantity' => $request->quantity,
         'colors' => $request->has('colors') ? implode(',', $request->colors) : null,
         'size' => $request->size,
@@ -86,6 +89,7 @@ public function update(Request $request, $id){
     $request->validate([
         'subcategory_id' => 'required',
         'title' => 'required',
+        'brand' => 'required',
         'product_code' => 'required|unique:products,product_code,'.$product->id,
         'price' => 'required',
         'discount' => 'required',
@@ -118,9 +122,11 @@ public function update(Request $request, $id){
     $product->update([
         'subcategory_id' => $request->subcategory_id,
         'title' => $request->title,
+        'brand' => $request->brand,
         'product_code' => $request->product_code,
         'price' => $request->price,
-        'discount' => $request->discount,
+        'original_price' => $request->original_price,
+        'discount'       => $request->discount,
         'colors' => $request->has('colors') ? implode(',', $request->colors) : null,
         'quantity' => $request->quantity,
         'size' => $request->size,

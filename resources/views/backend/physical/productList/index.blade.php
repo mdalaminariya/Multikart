@@ -69,7 +69,11 @@
                                                     @endforeach
                                                 </ul>
                                             @else
-                                                N/A
+
+                                            <h6>
+                                                Color: Not available.
+                                            </h6>
+                                            
                                             @endif
                                         </td>
                                      </div>
