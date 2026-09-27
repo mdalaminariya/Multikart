@@ -47,6 +47,14 @@
 
                     <ul class="sidebar-submenu">
 
+                                <li>
+                                    <a href="{{ route('admin.sliders.index') }}">
+                                        <i class="fa fa-circle"></i>
+                                        Sliders
+                                    </a>
+                                </li>
+
+
                         {{-- Physical --}}
                         <li>
                             <a href="javascript:void(0)">

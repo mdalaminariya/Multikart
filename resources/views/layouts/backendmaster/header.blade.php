@@ -20,9 +20,16 @@
                 <div class="nav-right col">
                     <ul class="nav-menus">
                         <li>
-                            <form class="form-inline search-form">
+                            <form class="form-inline search-form" action="{{ route('search') }}" method="GET">
                                 <div class="form-group">
-                                    <input class="form-control-plaintext" type="search" placeholder="Search..">
+                                    <input
+                                        class="form-control-plaintext"
+                                        type="search"
+                                        name="search"
+                                        value="{{ request('search') }}"
+                                        placeholder="Search.."
+                                        autocomplete="off">
+
                                     <span class="d-sm-none mobile-search">
                                         <i data-feather="search"></i>
                                     </span>
@@ -36,7 +43,7 @@
                         </li>
 
                         {{-- **Language** --}}
-                        
+
                         {{-- <li class="onhover-dropdown">
                             <a class="txt-dark" href="javascript:void(0)">
                                 <h6>EN</h6>
@@ -61,57 +68,116 @@
                             </ul>
                         </li> --}}
 
+                        {{-- Notifications --}}
+
+
                         <li class="onhover-dropdown">
+
                             <i data-feather="bell"></i>
-                            <span class="badge badge-pill badge-primary pull-right notification-badge">3</span>
-                            <span class="dot"></span>
-                            <ul class="notification-dropdown onhover-show-div p-0">
-                                <li>Notification <span class="badge badge-pill badge-primary pull-right">3</span></li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h6 class="mt-0">
-                                                <span>
-                                                    <i class="shopping-color" data-feather="shopping-bag"></i>
-                                                </span>Your order ready for Ship..!
-                                            </h6>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 txt-success">
-                                                <span>
-                                                    <i class="download-color font-success" data-feather="download"></i>
-                                                </span>Download Complete
-                                            </h6>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 txt-danger">
-                                                <span>
-                                                    <i class="alert-color font-danger" data-feather="alert-circle"></i>
-                                                </span>250 MB trash files
-                                            </h6>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="txt-dark"><a href="javascript:void(0)">All</a> notification</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <i class="right_side_toggle" data-feather="message-square"></i>
+
+                            <span class="badge badge-pill badge-primary pull-right notification-badge">
+                                {{ $notificationCount }}
+                            </span>
+
+                            @if($notificationCount > 0)
                                 <span class="dot"></span>
-                            </a>
+                            @endif
+
+                            <ul class="notification-dropdown onhover-show-div p-0">
+
+                                <li>
+                                    Notification
+
+                                    <span class="badge badge-pill badge-primary pull-right">
+                                        {{ $notificationCount }}
+                                    </span>
+                                </li>
+
+
+                                @forelse($notifications as $notification)
+
+                                    <li>
+
+                                        <a href="{{ route('admin.orders.details', $notification['order_id']) }}"
+                                        class="text-decoration-none">
+
+                                            <div class="media">
+
+                                                <div class="media-body">
+
+                                                    <h6 class="mt-0">
+
+                                                        <span>
+                                                            <i
+                                                                class="{{ $notification['color'] }}"
+                                                                data-feather="{{ $notification['icon'] }}">
+                                                            </i>
+                                                        </span>
+
+                                                        {{ $notification['title'] }}
+
+                                                    </h6>
+
+                                                    <p class="mb-0">
+                                                        {{ $notification['message'] }}
+                                                    </p>
+
+                                                    <small class="text-muted">
+                                                        {{ $notification['date']->diffForHumans() }}
+                                                    </small>
+
+                                                </div>
+
+                                            </div>
+
+                                        </a>
+
+                                    </li>
+
+                                @empty
+
+                                    <li>
+                                        <div class="media">
+                                            <div class="media-body text-center">
+                                                <h6 class="mt-0">
+                                                    <i data-feather="bell-off"></i>
+                                                    No notifications
+                                                </h6>
+
+                                                <p class="mb-0">
+                                                    You don't have any orders yet.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                @endforelse
+
+
+                                <li class="txt-dark">
+                                    <a href="{{ route('admin.orders.list') }}">
+                                        All
+                                    </a>
+                                    notification
+                                </li>
+
+                            </ul>
+
                         </li>
+
+                        {{-- Message --}}
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <i class="right_side_toggle" data-feather="message-square"></i>
+
+                                    @if(isset($notificationCount) && $notificationCount > 0)
+                                        <span class="dot"></span>
+                                    @endif
+                                </a>
+                            </li>
+
+                            {{-- Profile --}}
                         <li class="onhover-dropdown">
                             <div class="media align-items-center">
                                 @if (auth()->user()->image == 'default.png')
@@ -126,6 +192,7 @@
                                     <span class="main-circle"></span>
                                 </div>
                             </div>
+
                             <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
                                 <li>
                                     <a href="{{ route('admin.account.settings.edit') }}">

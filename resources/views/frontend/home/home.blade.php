@@ -1,22 +1,160 @@
 @extends('layouts.frontendmaster.master')
 
 @section('content')
-        <!-- Home slider -->
+
+<!-- Home slider -->
 <section class="p-0">
     <div class="slide-1 home-slider">
-        <div>
-            <a href="category-page.html" class="home">
-                <img src="{{ asset('frontend') }}/assets/images/fashion-1/full-banner/1.png" alt="" class="bg-img blur-up lazyload">
-            </a>
-        </div>
-        <div>
-            <a href="category-page.html" class="home">
-                <img src="{{ asset('frontend') }}/assets/images/fashion-1/full-banner/2.png" alt="" class="bg-img blur-up lazyload">
-            </a>
-        </div>
+
+        @forelse($sliders as $slider)
+
+            <div>
+                <a href="{{ $slider->link ?: route('shop') }}" class="home">
+
+                    <img
+                        src="{{ asset('uploads/sliders/' . $slider->image) }}"
+                        alt="{{ $slider->title ?? 'Slider Banner' }}"
+                        class="bg-img blur-up lazyload">
+
+                    <!-- Slider Content -->
+                    <div class="slider-content">
+
+                        @if($slider->title)
+                            <h1>{{ $slider->title }}</h1>
+                        @endif
+
+                        @if($slider->description)
+                            <p>{{ $slider->description }}</p>
+                        @endif
+
+                        <span class="slider-button">
+                            Shop Now
+                        </span>
+
+                    </div>
+
+                </a>
+            </div>
+
+        @empty
+
+            <!-- Fallback if no active slider exists -->
+            <div>
+                <a href="{{ route('shop') }}" class="home">
+
+                    <img
+                        src="{{ asset('frontend/assets/images/fashion-1/full-banner/1.png') }}"
+                        alt="Shop"
+                        class="bg-img blur-up lazyload">
+
+                    <div class="slider-content">
+                        <h1>Discover Our Collection</h1>
+                        <p>Explore our latest products and find something perfect for you.</p>
+
+                        <span class="slider-button">
+                            Shop Now
+                        </span>
+                    </div>
+
+                </a>
+            </div>
+
+            <div>
+                <a href="{{ route('shop') }}" class="home">
+
+                    <img
+                        src="{{ asset('frontend/assets/images/fashion-1/full-banner/2.png') }}"
+                        alt="Shop"
+                        class="bg-img blur-up lazyload">
+
+                    <div class="slider-content">
+                        <h1>Latest Products</h1>
+                        <p>Shop our newest products and enjoy a great shopping experience.</p>
+
+                        <span class="slider-button">
+                            Shop Now
+                        </span>
+                    </div>
+
+                </a>
+            </div>
+
+        @endforelse
+
     </div>
 </section>
 <!-- Home slider end -->
+
+
+<style>
+    .home-slider .home {
+        position: relative;
+        display: block;
+    }
+
+    .home-slider .slider-content {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform: translateY(-50%);
+        z-index: 2;
+        max-width: 500px;
+    }
+
+    .home-slider .slider-content h1 {
+        margin-bottom: 12px;
+        font-size: 42px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .home-slider .slider-content p {
+        margin-bottom: 25px;
+        font-size: 17px;
+        line-height: 1.6;
+        color: #ffffff;
+    }
+
+    .home-slider .slider-button {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #ffffff;
+        color: #222222;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .home-slider .slider-button:hover {
+        background: #222222;
+        color: #ffffff;
+    }
+
+    @media (max-width: 767px) {
+        .home-slider .slider-content {
+            left: 6%;
+            right: 6%;
+            max-width: 90%;
+        }
+
+        .home-slider .slider-content h1 {
+            font-size: 25px;
+        }
+
+        .home-slider .slider-content p {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .home-slider .slider-button {
+            padding: 9px 18px;
+            font-size: 12px;
+        }
+    }
+</style>
+
 
 <!-- collection banner -->
 <section class="pb-0 banner-section">

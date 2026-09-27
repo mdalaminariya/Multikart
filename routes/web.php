@@ -29,6 +29,7 @@ use App\Http\Controllers\Backend\Digital\ProductController as DigitalProductCont
 use App\Http\Controllers\Backend\reports\ReportController;
 use App\Http\Controllers\Frontend\VendorController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
+use App\Http\Controllers\Backend\Slider\SliderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,8 +52,6 @@ use Illuminate\Support\Facades\Route;
     Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-
-    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
     Route::delete('/wishlist/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
     });
@@ -121,12 +120,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::post('/vendor/settings/delete', [VendorController::class, 'deleteAccount'])->name('vendor.settings.delete');
 
-    //vendor profile
-    Route::get('/vendor/dashboard', [VendorController::class, 'index'])
-        ->name('vendor.dashboard');
-
-    Route::get('/vendor/profile', [VendorController::class, 'vendorprofile'])
-        ->name('vendor.profile');
+    Route::get('/vendor/profile', [VendorController::class, 'vendorprofile'])->name('vendor.profile');
 
         });
 
@@ -209,24 +203,40 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('/digital/product',[DigitalProductController::class,'index'])->name('digital.product.index');
     Route::post('/digital/product/store',[DigitalProductController::class,'store'])->name('digital.product.store');
     Route::post('/digital/product/upload', [DigitalProductController::class, 'upload'])->name('digital.product.upload');
-    Route::get('/digital/product/view',[DigitalProductController::class,'ProductlistView'])->name('digital.productlist.view');
+    Route::get('/digital/productlist/view',[DigitalProductController::class,'ProductlistView'])->name('digital.productlist.view');
     Route::get('/digital/product/edit/{id}',[DigitalProductController::class, 'edit'])->name('digital.product.edit');
     Route::put('/digitalproduct/update/{id}',[DigitalProductController::class,'update'])->name('digital.product.update');
     Route::get('/digitalproduct/delete/{id}',[DigitalProductController::class,'delete'])->name('digital.product.delete');
     Route::get('/digitalproduct/details/{id}',[DigitalProductController::class,'details'])->name('digital.product.details');
 
+
+    // Slider routes
+    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index');
+
+    Route::get('/sliders/create', [SliderController::class, 'create'])->name('sliders.create');
+
+    Route::post('/sliders/store', [SliderController::class, 'store'])->name('sliders.store');
+
+    Route::get('/sliders/edit/{slider}', [SliderController::class, 'edit'])->name('sliders.edit');
+
+    Route::put('/sliders/update/{slider}', [SliderController::class, 'update'])->name('sliders.update');
+
+    Route::get('/sliders/delete/{slider}', [SliderController::class, 'destroy'])->name('sliders.delete');
+
+    Route::get('/sliders/status/{slider}', [SliderController::class, 'status'])->name('sliders.status');
+
     // Order routes start
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.list');
-    Route::put('/admin/orders/{order}/status',[OrderController::class, 'updateStatus'])->name('orders.status.update');
+    Route::put('/orders/{order}/status',[OrderController::class, 'updateStatus'])->name('orders.status.update');
     Route::get('/orders/{order}', [OrderController::class, 'delete'])->name('orders.delete');
 
     // order tracking routes
-    Route::get('/admin/orders/tracking',[OrderController::class, 'tracking'])->name('orders.tracking.list');
+    Route::get('/orders/tracking',[OrderController::class, 'tracking'])->name('orders.tracking.list');
     Route::get('/orders/{order}/tracking', [OrderController::class, 'trackingOrder'])->name('orders.tracking');
 
     // order details route
-    Route::get('/admin/orders/{order}', [OrderController::class, 'details'])->name('orders.details');
-    Route::get('/admin/orders/details', [OrderController::class, 'latestDetails'])->name('orders.details.latest');
+    Route::get('/orders/{order}', [OrderController::class, 'details'])->name('orders.details');
+    Route::get('/orders/details', [OrderController::class, 'latestDetails'])->name('orders.details.latest');
     // order routes end
 
     // Bank details
@@ -239,15 +249,6 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
     Route::get('/coupons/{coupon}/edit', [CouponController::class, 'edit'])->name('coupons.edit');
     Route::post('/coupons/{coupon}', [CouponController::class, 'update'])->name('coupons.update');
     Route::get('/coupons/delete/{id}', [CouponController::class, 'delete'])->name('coupons.delete');
-
-    // pages routes
-    Route::get('/pages',[PageController::class,'index'])->name('pages.index');
-    Route::get('/pages/create',[PageController::class,'create'])->name('pages.create');
-    Route::post('/pages/store',[PageController::class,'store'])->name('pages.store');
-    Route::get('/pages/edit/{id}',[PageController::class,'edit'])->name('pages.edit');
-    Route::post('/pages/update/{id}',[PageController::class,'update'])->name('pages.update');
-    Route::get('/pages/delete/{id}',[PageController::class,'destroy'])->name('pages.delete');
-
     // Report routes
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     // sales order
@@ -257,20 +258,6 @@ Route::group(['prefix' => 'admin','as' => 'admin.','middleware' => ['auth','veri
 
     Route::get('sales/transactions',[BackendController::class,'transaction'])->name('sales.transaction');
 
-    //menu routes
-    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
-    Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');
-    Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
-    Route::get('/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
-    Route::post('/menu/update/{id}', [MenuController::class, 'update'])->name('menu.update');
-    Route::get('/menu/delete/{id}', [MenuController::class, 'destroy'])->name('menu.delete');
-
-    // media routes
-    Route::get('/media', [MediaController::class, 'index'])->name('media.index');
-
-    Route::post('/media/store', [MediaController::class, 'store'])->name('media.store');
-
-    Route::delete('/media/delete', [MediaController::class, 'destroy'])->name('media.delete');
     });
     // account settings
     Route::get('/account/settings', [AccountSettingController::class, 'index'])->name('account.setting');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\physical\category\Category as PhysicalCategory;
 use App\Models\digital\category\Category as DigitalCategory;
 use App\Models\Cart;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 // Physical Product
@@ -18,6 +19,15 @@ class HomeController extends Controller
 {
     public function index()
     {
+
+      /*
+        |--------------------------------------------------------------------------
+        | Slider
+        |--------------------------------------------------------------------------
+        */
+
+        $sliders = Slider::where('status', 'active')->orderBy('sort_order')->orderByDesc('created_at')->get();
+
         /*
         |--------------------------------------------------------------------------
         | PRODUCTS (MERGED)
@@ -51,7 +61,8 @@ $groupedProducts = $products->groupBy(function ($product) {
 
         return view('frontend.home.home', compact(
             'products',
-            'groupedProducts'
+            'groupedProducts',
+            'sliders'
         ));
     }
 
